@@ -38,7 +38,8 @@ from django.http import FileResponse, JsonResponse, Http404
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from django.urls import reverse
-
+from django.http import HttpResponse
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 # ---------- Validation patterns ----------
 NAME_RE  = re.compile(r"^[A-Za-z\s'.-]{2,}$")
@@ -531,3 +532,7 @@ def download_file(request):
     resp = FileResponse(open(path, "rb"), content_type=ctype or "application/octet-stream")
     resp["Content-Disposition"] = f'attachment; filename="{name}"'
     return resp
+
+def sitemap(request):
+    with staticfiles_storage.open("sitemap.xml") as f:
+        return HttpResponse(f.read(), content_type="application/xml")

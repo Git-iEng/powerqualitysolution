@@ -23,4 +23,5 @@ urlpatterns = [
      
     # include the app with namespace so names like 'cmmsApp:request_demo' work
     path("", include(("cmmsApp.urls", "cmmsApp"), namespace="cmmsApp")),
+    
 ]

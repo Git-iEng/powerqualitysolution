@@ -44,6 +44,7 @@ urlpatterns = [
 
 
     path('contact/', views.contact, name='contact'),
+    path("sitemap.xml", views.sitemap, name="sitemap"),
     
 
 ]
