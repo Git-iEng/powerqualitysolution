@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('cmmsApp.urls')),  # Make sure this points to a valid URL
+     path("admin/", admin.site.urls),
+     
+    # include the app with namespace so names like 'cmmsApp:request_demo' work
+    path("", include(("cmmsApp.urls", "cmmsApp"), namespace="cmmsApp")),
 ]

@@ -45,6 +45,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # add here
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -117,6 +118,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "static_collected" 
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -136,15 +141,21 @@ EMAIL_HOST_USER = 'test@ieng.tech'  # Your email address
 EMAIL_HOST_PASSWORD = 'test@iEng'  # Your email password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 CONTACT_RECIPIENTS = [
-    "mayur@iengaust.com.au",
-   "diksha@iengaust.com.au",
+    "tushar@iengaust.com.au",
+   "amar@iengaust.com.au", 
+   "kushankur@iengaust.com.au", 
+   "priya@iengaust.com.au", 
+   "test@ieng.tech",
 ]
+CONTACT_RECIPIENTS = [ "tushar@iengaust.com.au","amar@iengaust.com.au", "kushankur@iengaust.com.au", "priya@iengaust.com.au", "test@ieng.tech"]
+DEMO_RECIPIENTS = CONTACT_RECIPIENTS
+
 # CONTACT_EMAIL = 'diksha@iengaust.com.au'
 
 
 # Who receives the notifications
 CONTACT_INBOX = CONTACT_RECIPIENTS[0]
 EMAIL_TIMEOUT = 15
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True

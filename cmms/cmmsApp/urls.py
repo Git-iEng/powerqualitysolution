@@ -3,31 +3,48 @@ from django.urls import path
 from . import views
 from .views import contact_section
 app_name = 'cmmsApp'
+from .views import request_demo_view
+
+from django.urls import path
+from cmmsApp import views
+
+
+    # ... your other urls
+    
+
 
 urlpatterns = [
-     path("request-demo/", views.request_demo_view, name="request_demo"),
+ # ...
+  path("sitemap.xml", views.sitemap, name="sitemap"), 
+    path("request-download/", views.request_download, name="request_download"),
+    path("download/", views.download_file, name="download_file"),
+    path("thanks/", views.contact_thanks, name="contact_thanks"),
+      path("request-demo/", views.request_demo_view, name="request_demo"),
+    # path("contact-thanks/", views.thanks_view, name="contact_thanks"),  # if you add a separate thanks view for demo
+    path('', views.home, name='home'),
+
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
-    path('factory/', views.factory, name='factory'),
-    path('healthcare/', views.healthcare, name='healthcare'),
-    path('facility/', views.facility, name='facility'),
-    path('city/', views.city, name='city'),
-    path('transport/', views.transport, name='transport'),
-    # path('contact/', views.contact, name='contact'),
-    path("contacts/", views.contact_section, name="contact_section"),
-    path("contacts/thanks/", views.contact_thanks, name="contact_thanks"),
-    path("iot/", views.iot, name="iot"),
-    path('eam/', views.eam, name='eam'),
-    path('apm/', views.apm, name='apm'),
-    path('mobility/', views.mobility, name='mobility'),
-    path('plans/', views.plans, name='plans'),
+   
+
+
+   path("contact/", views.contact, name="contact"),
     path('about/', views.about, name='about'),
-    path('contacts/', views.contact_section, name='contact_section'),
-    path('contacts/thanks/', views.contact_thanks, name='contact_thanks'),
-    path('workorder/', views.workorder, name='workorder'),
-    path('compliance/', views.compliance, name='compliance'),
-    path('gis/', views.gis, name='gis'),
-    path('scada/', views.scada, name='scada'),
-    path('erpsync/', views.erpsync, name='erpsync'),
+    # path('contacts/', views.contact_section, name='contact_section'),
+    path('contact/thanks/', views.contact_thanks, name='contact_thanks'),
+    
     # More URLs
+     # --- NEW: consulting block form + helper ---
+    path("contact/submit/", views.contact_block_submit, name="contact_submit"),
+    path("contact/phone-info/", views.phone_info, name="phone_info"),
+    
+    path("contact/country-list/", views.country_list, name="country_list"),
+
+
+
+
+    path('contact/', views.contact, name='contact'),
+    
+
 ]
+

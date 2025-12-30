@@ -1,209 +1,225 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--=============== REMIXICONS ===============-->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
-
-    <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="{% static 'css/header.css' %}">
-
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--=============== REMIXICONS ===============-->
+  <link rel="stylesheet" href="{% static 'css/demo_form.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="{% static 'css/header.css' %}">
 </head>
+
 <body>
-    <!--=============== HEADER ===============-->
+  {% include 'request_demo_modal.html' %}
 
-    <header class="header">
-        <nav class="nav container">
-            <div class="nav__data">
-                <a href="/" class="nav__logo">
-                    <img src="{% static 'images/logo.png' %}" alt="Company Logo" class="logo-img">
-                </a>
+  <!--=============== HEADER ===============-->
+<header class="header">
+  <nav class="nav container" aria-label="Primary">
+    <div class="nav__data">
+      <a href="#home" class="nav__logo" data-scroll-to>
+        <img src="{% static 'images/logo.png' %}" alt="Company Logo" class="logo-img">
+      </a>
 
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class="ri-menu-line nav__burger"></i>
-                    <i class="ri-close-line nav__close"></i>
-                </div>
-            </div>
+      <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+        <i class="ri-menu-line nav__burger"></i>
+        <i class="ri-close-line nav__close"></i>
+      </button>
+    </div>
 
-            <!--=============== NAV MENU ===============-->
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <!-- Solutions Dropdown -->
-                    <li class="dropdown__item solutions-dropdown">
-                        <div class="nav__link dropdown-toggle-solutions">
-                            Solutions <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-
-                        <div class="dropdown__menu solutions-menu">
-                            <div class="solution-column">
-                                <h4>ASSET MANAGEMENT</h4>
-                                <a href="/eam/" class="dropdown__link" style="font-size: 1rem; color: black;"><strong>EAM
-                                        platform</strong></a>
-                                <p style="font-size: .7rem; padding-bottom: 40px;">Comprehensive Asset Control</p>
-                                <a href="/apm/" class="dropdown__link"><strong>APM suite</strong></a>
-                                <p style="font-size: .7rem;padding-bottom: 40px;">Enhance Performance, <br>minimize
-                                    downtime</p>
-                                <a href="/mobility/" class="dropdown__link"><strong>Mobile app</strong></a>
-                                <p style="font-size: .7rem;padding-bottom: 40px;">Empower Field Teams</p>
-                            </div>
-                            <div class="solution-column">
-                                <h4>MAINTENANCE</h4>
-
-                                <a href="/plans/" class="dropdown__link"
-                                    style="font-size: 1rem; color: black;"><strong>Planning</strong></a>
-                                <p style="font-size: .7rem; padding-bottom: 40px;">Streamline maintenance<br>schedules
-                                </p>
-
-                                <a href="/workorder/" class="dropdown__link" style="font-size: 1rem; color: black;"><strong>Work
-                                        orders</strong></a>
-                                <p style="font-size: .7rem; padding-bottom: 40px;">Efficient task management</p>
-
-                                <a href="/compliance/" class="dropdown__link"
-                                    style="font-size: 1rem; color: black;"><strong>Compliance</strong></a>
-                                <p style="font-size: .7rem; padding-bottom: 40px;">Ensure regulatory adherence</p>
-
-                            </div>
-                            <div class="solution-column">
-                                <h4>INTEGRATION</h4>
-
-                                <a href="/scada/" class="dropdown__link" style="font-size: 1rem; color: rgb(0, 0, 0);"><strong>IoT &
-                                        SCADA</strong></a>
-                                <p style="font-size: .7rem; padding-bottom: 40px; color: rgb(0, 0, 0);">Seamless data
-                                    integration</p>
-
-                                <a href="/gis/" class="dropdown__link" style="font-size: 1rem; color: black;"><strong>GIS
-                                        mapping</strong></a>
-                                <p style="font-size: .7rem; padding-bottom: 40px;">Visualize assets spatially</p>
-
-                                <a href="/erpsync/" class="dropdown__link" style="font-size: 1rem; color: black;"><strong>ERP
-                                        sync</strong></a>
-                                <p style="font-size: .7rem; padding-bottom: 40px;">Integrate financial data</p>
-
-                            </div>
-                            <div class="solution-feature-box" style="padding: 50px;">
-                                <p><strong>Smarter</strong><br><strong>maintenance.</strong> <br><strong>Stronger
-                                        assets.</strong> </p>
-                                <p style="font-size: .7rem; color: rgb(106, 106, 106);">Digitize and enhance asset
-                                    operations</p>
-                                <a href="#" style="font-size: 1rem; margin-top: 30px;padding-top: 40px;">Discover more
-                                    →</a>
-                            </div>
-                        </div>
-                    </li>
+    <!--=============== NAV MENU ===============-->
+    <div class="nav__menu" id="nav-menu">
+      <ul class="nav__list">
+        <!-- Simple section anchors (no dropdowns) -->
+        
+        <!-- <li class="dropdown__item">
+          <a href="#services" class="nav__link" data-scroll-to>Services</a>
+        </li> -->
+        <li class="dropdown__item">
+          <a href="#types" class="nav__link" data-scroll-to>Types</a>
+        </li>
+        <li class="dropdown__item">
+          <a href="#solutions" class="nav__link" data-scroll-to>Solutions</a>
+        </li>
+        <li class="dropdown__item">
+          <a href="#projects" class="nav__link" data-scroll-to>Projects</a>
+        </li>
+        <li class="dropdown__item">
+          <a href="#about-us" class="nav__link" data-scroll-to>About</a>
+        </li>
+<li class="dropdown__item">
+          <a href="#contact" class="nav__link" data-scroll-to>Contact</a>
+        </li>
+        <button type="button" class="book-demo-btn js-open-demo" data-scroll-to data-target="#request-demo">
+          Submit Inquiry <i class="bi bi-arrow-right-circle"></i>
+        </button>
+      </ul>
+    </div>
+  </nav>
+</header>
 
 
-                    <!-- <li><a href="#" class="nav__link">Services</a></li> -->
-                    <!--=============== DROPDOWN 1 ===============-->
-                    <li class="dropdown__item">
-                        <div class="nav__link">
-                            Industries <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
+  <!-- Your sections go below … -->
 
-                        <ul class="dropdown__menu">
-                            <li>
-                                <a href="/facility/" class="dropdown__link">Facility
-                                    <!-- <i class="ri-pie-chart-line"></i> -->
-                                </a>
-                            </li>
+  <!--=============== MAIN JS ===============-->
+  <script src="{% static 'js/header.js' %}"></script>
+  <script defer src="{% static 'js/demo_form.js' %}"></script>
+  <script>
+    /* ===== Smooth in-page scroll + active link + mobile close ===== */
+    (function () {
+      const header = document.querySelector('.header');
+      const navMenu = document.getElementById('nav-menu');
+      const navToggle = document.getElementById('nav-toggle');
+      const links = document.querySelectorAll('[data-scroll-to]');
 
-                            <li>
-                                <a href="/transport/" class="dropdown__link">Transport
-                                    <!-- <i class="ri-arrow-up-down-line"></i>  -->
-                                </a>
-                            </li>
+      function headerOffset() {
+        return header ? header.offsetHeight : 0;
+      }
 
-                            <li>
-                                <a href="/factory/" class="dropdown__link">Factory
-                                    <!-- <i class="ri-pie-chart-line"></i> -->
-                                </a>
-                            </li>
+      function smoothScrollTo(id) {
+        const target = id ? document.querySelector(id) : null;
+        if (!target) return;
 
-                            <li>
-                                <a href="/city/" class="dropdown__link">City
-                                    <!-- <i class="ri-arrow-up-down-line"></i>  -->
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/healthcare/" class="dropdown__link">Healthcare
-                                    <!-- <i class="ri-arrow-up-down-line"></i>  -->
-                                </a>
-                            </li>
+        const y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
 
-                            <!--=============== DROPDOWN SUBMENU ===============-->
-                            <!-- <li class="dropdown__subitem">
-                                <div class="dropdown__link">
-                                    <i class="ri-bar-chart-line"></i> Reports <i class="ri-add-line dropdown__add"></i>
-                                </div>
+      function setActiveOnScroll() {
+        const sections = document.querySelectorAll('section[id]');
+        let current = '';
+        sections.forEach(sec => {
+          const secTop = sec.offsetTop - headerOffset() - 1;
+          if (pageYOffset >= secTop) current = sec.getAttribute('id');
+        });
+        document.querySelectorAll('.nav__link, .dropdown__link').forEach(a => {
+          const href = a.getAttribute('href') || a.dataset.target;
+          a.classList.toggle('active-link', href === `#${current}`);
+        });
+      }
 
-                                <ul class="dropdown__submenu">
-                                    <li>
-                                        <a href="#" class="dropdown__sublink">
-                                            <i class="ri-file-list-line"></i> Documents
-                                        </a>
-                                    </li>
+      // Click handler
+      links.forEach(el => {
+        el.addEventListener('click', (e) => {
+          const targetSel = el.getAttribute('href') || el.dataset.target;
+          if (!targetSel || !targetSel.startsWith('#')) return;
+          e.preventDefault();
+          smoothScrollTo(targetSel);
+          // close mobile menu
+          if (navMenu?.classList.contains('show-menu')) {
+            navMenu.classList.remove('show-menu');
+            navToggle?.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
 
-                                    <li>
-                                        <a href="#" class="dropdown__sublink">
-                                            <i class="ri-cash-line"></i> Payments
-                                        </a>
-                                    </li>
+      // Toggle mobile nav
+      navToggle?.addEventListener('click', () => {
+        navMenu.classList.toggle('show-menu');
+        const expanded = navMenu.classList.contains('show-menu');
+        navToggle.setAttribute('aria-expanded', String(expanded));
+      });
 
-                                    <li>
-                                        <a href="#" class="dropdown__sublink">
-                                            <i class="ri-refund-2-line"></i> Refunds
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
-                        </ul>
-                    </li>
+      window.addEventListener('scroll', setActiveOnScroll);
+      window.addEventListener('load', () => {
+        // If page loads with a hash, adjust to header height
+        if (window.location.hash) {
+          setTimeout(() => smoothScrollTo(window.location.hash), 0);
+        }
+        setActiveOnScroll();
+      });
+    })();
+  </script>
+  <!-- ...same head/body/header markup as you posted... -->
 
-                    <li><a href="/about/" class="nav__link">About</a></li>
+<script>
+  /* ===== Smooth in-page scroll + active link + mobile close ===== */
+  (function () {
+    const header = document.querySelector('.header');
+    const nav = document.querySelector('.nav');               // NEW
+    const navMenu = document.getElementById('nav-menu');
+    const navToggle = document.getElementById('nav-toggle');
+    const links = document.querySelectorAll('[data-scroll-to]');
 
-                    <!--=============== DROPDOWN 2 ===============-->
-                    <!-- <li class="dropdown__item"> -->
-                        <!-- <div class="nav__link">
-                            Resources
-                        </div> -->
+    function headerOffset() {
+      return header ? header.offsetHeight : 0;
+    }
 
-                        <!-- <ul class="dropdown__menu">
-                          <li>
-                                <a href="#" class="dropdown__link">
-                                    <i class="ri-user-line"></i> Profiles
-                                </a>
-                            </li>
+    function smoothScrollTo(id) {
+      const target = id ? document.querySelector(id) : null;
+      if (!target) return;
+      const y = target.getBoundingClientRect().top + window.pageYOffset - headerOffset();
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
 
-                            <li>
-                                <a href="#" class="dropdown__link">
-                                    <i class="ri-lock-line"></i> Accounts
-                                </a>
-                            </li>
+    function setActiveOnScroll() {
+      const sections = document.querySelectorAll('section[id]');
+      let current = '';
+      sections.forEach(sec => {
+        const secTop = sec.offsetTop - headerOffset() - 1;
+        if (pageYOffset >= secTop) current = sec.getAttribute('id');
+      });
+      document.querySelectorAll('.nav__link, .dropdown__link').forEach(a => {
+        const href = a.getAttribute('href') || a.dataset.target;
+        a.classList.toggle('active-link', href === `#${current}`);
+      });
+    }
 
-                            <li>
-                                <a href="#" class="dropdown__link">
-                                    <i class="ri-message-3-line"></i> Messages
-                                </a>
-                            </li>
-                        </ul> -->
-                    <!-- </li> -->
+    function openMenu() {
+      navMenu.classList.add('show-menu');
+      nav?.classList.add('show-icon');              // NEW: swap icons
+      document.body.classList.add('no-scroll');     // Optional: lock body scroll
+      navToggle?.setAttribute('aria-expanded', 'true');
+    }
 
-                    <li><a href="/contacts/" class="nav__link">Contact</a></li>
-                     <a href="#" class="book-demo-btn">
-                        Request Demo<i class="bi bi-arrow-right-circle"></i>
-                    </a>
-                </ul>
+    function closeMenu() {
+      navMenu.classList.remove('show-menu');
+      nav?.classList.remove('show-icon');           // NEW
+      document.body.classList.remove('no-scroll');  // Optional
+      navToggle?.setAttribute('aria-expanded', 'false');
+    }
 
-            </div>
-        </nav>
-    </header>
+    // Click handler for in-page links
+    links.forEach(el => {
+      el.addEventListener('click', (e) => {
+        const targetSel = el.getAttribute('href') || el.dataset.target;
+        if (!targetSel || !targetSel.startsWith('#')) return;
+        e.preventDefault();
+        smoothScrollTo(targetSel);
+        closeMenu();                                 // close on navigate (mobile)
+      });
+    });
 
-    <!--=============== MAIN JS ===============-->
-    <script src="{% static 'js/header.js'%}"></script>
+    // Toggle mobile nav
+    navToggle?.addEventListener('click', () => {
+      const isOpen = navMenu.classList.contains('show-menu');
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    // Close when clicking outside the menu (mobile)
+    document.addEventListener('click', (e) => {
+      const isClickInside = nav?.contains(e.target);
+      if (!isClickInside && navMenu.classList.contains('show-menu')) {
+        closeMenu();
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('show-menu')) {
+        closeMenu();
+      }
+    });
+
+    window.addEventListener('scroll', setActiveOnScroll);
+    window.addEventListener('load', () => {
+      if (window.location.hash) {
+        setTimeout(() => smoothScrollTo(window.location.hash), 0);
+      }
+      setActiveOnScroll();
+    });
+  })();
+</script>
+
 </body>
-
 </html>

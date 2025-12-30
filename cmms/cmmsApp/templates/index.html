@@ -5,396 +5,1088 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CMMS-Software</title>
+  <title>Power Quality Solution</title>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-TKQV8LKX');</script>
+  <!-- End Google Tag Manager -->
   <!--=============== CSS ===============-->
+  <meta name="description" content="Power quality analysis and mitigation across Australia and Oceania, aligned with IEC and IEEE standards for utilities and industry." >
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/neplan-about.css' %}">
+  <link rel="stylesheet" href="{% static 'css/consult-block.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" href="{% static 'images/logo1.png' %}">
   <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+  <script defer src="{% static 'js/main.js' %}"></script>
 
 
 </head>
 
 <body>
   {% include 'header.html' %}
-  <section class="hero-section">
-    <div class="container">
-      <div class="hero-container">
-        <div class="hero-text">
-          <h1 class="hero-title">Revolutionize your<br>asset management</h1>
-          <p class="hero-subtitle">
-            Optimize your infrastructure with cutting-edge EAM solutions.<br>
-            Enhance efficiency, ensure compliance, and boost reliability.
-          </p>
-          <div class="hero-buttons">
-            <a href="#" class="btn btn-primary">Get started</a>
-            <a href="#" class="btn btn-secondary">See features</a>
-          </div>
-        </div>
-
-        <div class="hero-image-wrapper">
-          <img src="{% static 'images/carlbanner.avif' %}" alt="Carl Software" class="hero-img">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="features-section">
-    <div class="container">
-      <h2>Transforming asset management for the future</h2>
-      <p class="subheading">Optimised solutions for infrastructure sectors</p>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <span class="icon">💬</span>
-          <h3>Comprehensive asset lifecycle solutions</h3>
-          <p>Achieve full visibility and compliance from start to finish.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="icon">👤</span>
-          <h3>Streamlined maintenance processes</h3>
-          <p>Enhance efficiency with automated, real-time maintenance.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="icon">✔️</span>
-          <h3>Empower your field teams</h3>
-          <p>Provide technicians with essential tools and data on the go.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="icon">✴️</span>
-          <h3>Seamless digital integration</h3>
-          <p>Connect systems for unified data and insights.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="pricing-wrapper">
-    <section class="pricing-section">
-      <p class="pricing-subtitle">Pricing & plans</p>
-      <h2 class="pricing-title">Transparent pricing. Scalable solutions.</h2>
-      <p class="pricing-subtitle">Flexible options for every operation size.</p>
-
-      <div class="pricing-grid">
-        <!-- Basic Plan -->
-        <div class="pricing-card">
-          <h3>Basic</h3>
-          <p class="plan-desc">Essential EAM for small teams.</p>
-          <div class="price">$19<span>/mo</span><br><small>or $199 yearly</small></div>
-          <a href="#" class="start-btn">Start free</a>
-          <ul>
-            <li>Asset tracking, work orders</li>
-            <li>Preventive maintenance tools</li>
-            <li>Mobile access</li>
-          </ul>
-        </div>
-
-        <!-- Business Plan -->
-        <div class="pricing-card">
-          <h3>Business</h3>
-          <p class="plan-desc">Advanced tools for growing teams.</p>
-          <div class="price">$29<span>/mo</span><br><small>or $289 yearly</small></div>
-          <a href="#" class="start-btn">Start free</a>
-          <ul>
-            <li>Custom workflows, dashboards</li>
-            <li>Inventory management</li>
-            <li>Contractor oversight</li>
-            <li>Compliance reporting</li>
-            <li>ERP integration</li>
-          </ul>
-        </div>
-
-        <!-- Enterprise Plan -->
-        <div class="pricing-card">
-          <h3>Enterprise</h3>
-          <p class="plan-desc">Full platform for complex needs.</p>
-          <div class="price">$49<span>/mo</span><br><small>or $499 yearly</small></div>
-          <a href="#" class="start-btn">Start free</a>
-          <ul>
-            <li>IoT, predictive analytics</li>
-            <li>Geospatial asset mapping</li>
-            <li>API system integrations</li>
-            <li>Dedicated support</li>
-            <li>Custom modules</li>
-            <li>On-premise or cloud</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </div>
-  <section class="asset-hero-wrap">
-    <div class="asset-hero-flex">
-      <div class="asset-hero-img">
-        <img src="{% static 'images/asset.avif' %}" alt="Asset technician image" />
-      </div>
-      <div class="asset-hero-textbox">
-        <p class="asset-hero-label">YOUR STRATEGIC PARTNER IN ASSET MANAGEMENT.</p>
-        <h1 class="asset-hero-title">
-          Enhance asset<br />
-          reliability<br />
-          and efficiency.
+  {% include 'request_demo_modal.html' %}
+  <!-- ====================== HERO / HEADLINE ====================== -->
+  <section id="home" class="section-hero-solar-system">
+    <div class="container-solar-system grid-hero-solar-system">
+      <div class="hero-left-solar-system">
+        <h1 class="hero-title-solar-system">
+          Power <span class="accent-solar-system">Quality Solutions</span> &amp;
+          <span class="accent-solar-system">Electrical Reliability</span>
         </h1>
-        <p class="asset-hero-subtitle">
-          Advanced solutions for infrastructure sectors.
+
+        <p class="hero-sub-solar-system">
+          Power quality solutions address variations in voltage and current that impact the reliability of electrical
+          systems.
+          Issues arise when the power supplied doesn’t match what sensitive loads require, often due to the growing use
+          of
+          power electronics and other <strong>non-linear loads</strong>, which can introduce harmonics and reduce
+          overall
+          distribution efficiency.
         </p>
-        <p class="asset-hero-description">
-          Leverage scalable, proven software for optimal results.
+
+        <p class="hero-sub-solar-system">
+          The consequences of poor power quality can be significant <strong>equipment overheating</strong>, overloading
+          of
+          <strong>neutral conductors</strong>, <strong>skin effect</strong> losses, nuisance tripping of circuit
+          breakers,
+          and general performance degradation. Improving power quality is essential for stable, efficient operations.
         </p>
-        <a href="#" class="asset-hero-cta">Get started</a>
+
+        <p class="hero-sub-solar-system">
+          We <strong>design, manufacture, supply, and commission</strong> a complete range of power quality products and
+          associated equipment to ensure clean, stable power supporting uptime, efficiency, and asset longevity.
+        </p>
+
+        <div class="hero-cta-solar-system">
+          <a href="#solutions" class="btn-primary-solar-system">Our Power Quality Solutions</a>
+          <a href="#contact" class="btn-ghost-solar-system js-open-demo">Get a Quote</a>
+        </div>
+      </div>
+
+      <div class="hero-right-solar-system">
+        <!-- Replace with your power quality banner image -->
+        <img src="{% static 'images/power.avif' %}"
+          alt="Power quality analysis with active filtering and harmonic mitigation" class="hero-img-solar-system">
       </div>
     </div>
+
+    <!-- Decorative base band -->
+    <div class="hero-band-solar-system"></div>
   </section>
 
-  <section class="testimonial-section">
-    <div class="testimonial-container">
-      <div class="testimonial-header">
-        <h2>Client success stories</h2>
-        <p>Discover how our solutions transform operations.</p>
-      </div>
+  <section class="section-about-lv-electrical-about-">
+    <div class="container-lv-electrical-about-">
+      <div class="grid-lv-electrical-about-">
+        <!-- Image -->
+        <figure class="media-lv-electrical-about- reveal-lv-electrical-about- reveal-left-lv-electrical-services">
+          <img src="{% static 'images/reliable.avif' %}"
+            alt="Power quality analysis with harmonics and voltage stability monitoring"
+            class="img-lv-electrical-about- reveal-left-lv-electrical-services" />
+        </figure>
 
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-quote">
-            “Our asset management has become effortless. We’ve seen a significant drop in downtime and a boost in
-            compliance, making our operations more efficient.”
+        <!-- Copy -->
+        <div class="copy-lv-electrical-about- reveal-lv-electrical-about-">
+          <h2 class="title-lv-electrical-about- reveal-right-lv-electrical-services">
+            Reliable &amp; Efficient <span class="accent-lv-electrical-about-">Power Quality Solutions</span>
+          </h2>
+
+          <p class="lead-lv-electrical-about- reveal-right-lv-electrical-services">
+            We design, supply, install, and commission <strong>power quality systems</strong> that correct issues caused
+            by
+            non-linear loads and power electronics such as harmonics, low power factor, voltage instability, and
+            nuisance trips.
+            Our solutions improve efficiency, protect assets, and enhance overall electrical reliability.
           </p>
-          <div class="testimonial-footer">
-            <div class="testimonial-user">
-              <img
-                src="https://cdn.prod.website-files.com/688c8eda82b85f5593a8831c/688c91774c4c9e40458b21d3_fbd5f6d2-98e0-421f-a563-a16743089aea.avif"
-                alt="Taylor Morgan" class="testimonial-avatar" />
-              <div>
-                <strong>Taylor Morgan</strong><br />
-                <span>Asset Reliability Lead, Energy Sector</span>
-              </div>
-            </div>
-            <img
-              src="https://cdn.prod.website-files.com/688c8eda82b85f5593a8831c/688c91774c4c9e40458b21d3_fbd5f6d2-98e0-421f-a563-a16743089aea.avif"
-              alt="Client Logo" class="testimonial-logo" />
-          </div>
+
+          <ul class="benefits-lv-electrical-about- reveal-right-lv-electrical-services">
+            <li><span class="dot-lv-electrical-about-"></span> <strong>Active Harmonic Filters (AHF)</strong> </li>
+            <li><span class="dot-lv-electrical-about-"></span> <strong>Power Factor Correction</strong> </li>
+            <li><span class="dot-lv-electrical-about-"></span> <strong>Dynamic VAR &amp; Voltage Support</strong> </li>
+            <li><span class="dot-lv-electrical-about-"></span> <strong>Surge &amp; Transient Protection</strong> </li>
+            <li><span class="dot-lv-electrical-about-"></span> <strong>Neutral Management</strong> </li>
+            <li><span class="dot-lv-electrical-about-"></span> <strong>PQ Metering &amp; Analytics</strong> </li>
+          </ul>
+
+          <a href="#projects" class="btn-primary-lv-electrical-about- reveal-right-lv-electrical-services">
+            Explore More
+          </a>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-quote">
-            “With CARL, we gained complete asset visibility and control. The support team was consistently responsive
-            and results-driven.”
+        <!-- Rating card -->
+        <aside class="rating-card-lv-electrical-about- reveal-lv-electrical-about- reveal-right-lv-electrical-services">
+          <div class="score-lv-electrical-about- reveal-right-lv-electrical-services">4.9</div>
+          <div class="stars-lv-electrical-about- reveal-right-lv-electrical-services" aria-label="4.9 out of 5">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="half-lv-electrical-about-">★</span>
+          </div>
+          <p class="rating-note-lv-electrical-about-">Verified Clients</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= HERO / IMAGE STRIP (same structure, power-quality-focused copy) ========= -->
+  <section class="section-services-lv-electrical-services" id="types">
+    <div class="services-head-lv-electrical-services">
+      <div class="head-left-lv-electrical-services reveal-left-lv-electrical-services">
+        <a class="eyebrow-lv-electrical-services">Power Quality Types</a>
+        <h2 class="title-lv-electrical-services">
+          Harmonic Mitigation &amp; PF Improvement Solutions
+        </h2>
+        <p class="subtitle-lv-electrical-services">
+          End-to-end solutions to improve power factor, reduce harmonics, and protect motors and drives
+          engineered for reliability, safety, and long service life.
+        </p>
+      </div>
+
+      <!-- Button to reveal more items (kept same id/class for your existing JS) -->
+      <a href="#all-types" id="exploreServicesBtn"
+        class="btn-orange-lv-electrical-services reveal-right-lv-electrical-services" aria-expanded="false">
+        Explore types
+      </a>
+    </div>
+  </section>
+
+  <!-- ========= OVERLAPPING WHITE CARD (Solutions Grid) ========= -->
+  <section class="section-services-lv-electrical-services2" id="all-types">
+    <div class="services-card-lv-electrical-services reveal-up-lv-electrical-services">
+      <div class="grid-lv-electrical-services" id="servicesGrid">
+
+        <!-- 1: REAL TIME POWER FACTOR CORRECTION PANEL (RTPFC) -->
+        <article class="svc-item-lv-electrical-services reveal-up-lv-electrical-services">
+
+          <h3 class="svc-title-lv-electrical-services">
+            <a href="#">Real-Time Power Factor Correction</a>
+          </h3>
+          <p class="svc-text-lv-electrical-services">
+            CRCA powder-coated MS enclosure, fully wired with self-healing MPP capacitors, duty/thyristor switched
+            contactors,
+            APFCR, forced ventilation, complete switchgear, AL/CU busbar, and IP protection. </strong>.
           </p>
-          <div class="testimonial-footer">
-            <div class="testimonial-user">
-              <img
-                src="https://cdn.prod.website-files.com/688c8eda82b85f5593a8831c/688c91774c4c9e40458b21d3_fbd5f6d2-98e0-421f-a563-a16743089aea.avif"
-                alt="Jordan Lee" class="testimonial-avatar" />
-              <div>
-                <strong>Jordan Lee</strong><br />
-                <span>Operations Manager, Transport Sector</span>
+
+          <!-- Optional screenshot -->
+          <!-- <img class="svc-shot-lv-electrical-services" src="{% static 'images/pq/rtpfc.png' %}" alt="RTPFC – CMMS Software Screenshot"> -->
+
+          <button class="svc-cta-lv-electrical-services" data-detail="rtpfc" aria-label="Learn more about RTPFC">
+            <span class="arrow-lv-electrical-services">Learn more</span>
+          </button>
+        </article>
+
+        <!-- 2: HT HARMONICS FILTER BANK -->
+        <article class="svc-item-lv-electrical-services reveal-up-lv-electrical-services">
+
+          <h3 class="svc-title-lv-electrical-services">
+            <a href="#">HT Harmonics Filter Bank</a>
+          </h3>
+          <p class="svc-text-lv-electrical-services">
+            HT capacitor + HT reactor in single or double star, integrated with NCT/RVT, engineered as a detuned bank to
+            stabilise PF
+            for dynamic loads and mitigate harmonics on MV systems.
+          </p>
+
+
+          <!-- <img class="svc-shot-lv-electrical-services" src="{% static 'images/pq/ht-filter.png' %}" alt="HT Harmonics Filter – CMMS Screenshot"> -->
+
+          <button class="svc-cta-lv-electrical-services" data-detail="htfilter"
+            aria-label="Learn more about HT Harmonics Filter Bank">
+            <span class="arrow-lv-electrical-services">Learn more</span>
+          </button>
+        </article>
+
+        <!-- 3: ACTIVE HARMONICS FILTER PANEL -->
+        <article class="svc-item-lv-electrical-services reveal-up-lv-electrical-services">
+
+          <h3 class="svc-title-lv-electrical-services">
+            <a href="#">Active Harmonics Filter Panel</a>
+          </h3>
+          <p class="svc-text-lv-electrical-services">
+            Precise compensation up to the <strong>50<sup>th</sup> harmonic order</strong> with reactive power
+            optimisation.
+            Suits a wide range of industrial feeders and non-linear loads.
+          </p>
+
+          <!-- <img class="svc-shot-lv-electrical-services" src="{% static 'images/pq/ahf.png' %}" alt="Active Harmonics Filter – CMMS Screenshot"> -->
+
+          <button class="svc-cta-lv-electrical-services" data-detail="ahf"
+            aria-label="Learn more about Active Harmonics Filter">
+            <span class="arrow-lv-electrical-services">Learn more</span>
+          </button>
+        </article>
+
+        <!-- 4: PASSIVE HARMONICS FILTER (hidden initially) -->
+        <article class="svc-item-lv-electrical-services is-hidden reveal-up-lv-electrical-services">
+
+          <h3 class="svc-title-lv-electrical-services">
+            <a href="#">Passive Harmonics Filter</a>
+          </h3>
+          <p class="svc-text-lv-electrical-services">
+            CRCA enclosure with self-healing MPP capacitors, reactors, capacitor duty contactors, APFCR, AL/CU busbars
+            and IP protection.
+          </p>
+
+
+
+          <!-- <img class="svc-shot-lv-electrical-services" src="{% static 'images/pq/passive-filter.png' %}" alt="Passive Filter – CMMS Screenshot"> -->
+
+          <button class="svc-cta-lv-electrical-services" data-detail="phf"
+            aria-label="Learn more about Passive Harmonics Filter">
+            <span class="arrow-lv-electrical-services">Learn more</span>
+          </button>
+        </article>
+
+        <!-- 5: HYBRID FILTER (hidden initially) -->
+        <article class="svc-item-lv-electrical-services is-hidden reveal-up-lv-electrical-services">
+
+          <h3 class="svc-title-lv-electrical-services">
+            <a href="#">Hybrid Filter (Active + Passive)</a>
+          </h3>
+          <p class="svc-text-lv-electrical-services">
+            IGBT-based converter combined with detuned stages for fast, stable compensation of harmonics and PF.
+          </p>
+
+
+          <!-- <img class="svc-shot-lv-electrical-services" src="{% static 'images/pq/hybrid-filter.png' %}" alt="Hybrid Filter – CMMS Screenshot"> -->
+
+          <button class="svc-cta-lv-electrical-services" data-detail="hybrid"
+            aria-label="Learn more about Hybrid Filter">
+            <span class="arrow-lv-electrical-services">Learn more</span>
+          </button>
+        </article>
+
+        <!-- 6: SINE WAVE FILTER (hidden initially) -->
+        <article class="svc-item-lv-electrical-services is-hidden reveal-up-lv-electrical-services">
+
+          <h3 class="svc-title-lv-electrical-services">
+            <a href="#">Sine Wave Filter</a>
+          </h3>
+          <p class="svc-text-lv-electrical-services">
+            Converts VFD PWM to a smooth sine wave; mitigates high dv/dt, cable ringing, motor overheating, and eddy
+            current losses;
+            extends bearing and insulation life.
+          </p>
+
+
+          <!-- <img class="svc-shot-lv-electrical-services" src="{% static 'images/pq/sine-wave.png' %}" alt="Sine Wave Filter – CMMS Screenshot"> -->
+
+          <button class="svc-cta-lv-electrical-services" data-detail="sine"
+            aria-label="Learn more about Sine Wave Filter">
+            <span class="arrow-lv-electrical-services">Learn more</span>
+          </button>
+        </article>
+
+        <!-- 7: DV/DT FILTER (hidden initially) -->
+        <article class="svc-item-lv-electrical-services is-hidden reveal-up-lv-electrical-services">
+
+          <h3 class="svc-title-lv-electrical-services">
+            <a href="#">dv/dt Filter</a>
+          </h3>
+          <p class="svc-text-lv-electrical-services">
+            Designed to limit voltage rise (dv/dt) from drives, reducing insulation stress and improving system
+            longevity.
+          </p>
+
+          <!-- <img class="svc-shot-lv-electrical-services" src="{% static 'images/pq/dvdt.png' %}" alt="dv/dt Filter – CMMS Screenshot"> -->
+
+          <button class="svc-cta-lv-electrical-services" data-detail="dvdtFilter"
+            aria-label="Learn more about dv/dt Filter">
+            <span class="arrow-lv-electrical-services">Learn more</span>
+          </button>
+        </article>
+
+        <article class="svc-item-lv-electrical-services is-hidden reveal-up-lv-electrical-services">
+
+          <h3 class="svc-title-lv-electrical-services">
+            <a href="#">Static Var Generator (SVG)</a>
+          </h3>
+          <p class="svc-text-lv-electrical-services">
+            Automatic power factor correction equipment is widely used in industry to ensure optimal utilization of the
+            electrical network. Typically, such power factor correction involves an automatic controller that monitors
+            the incoming phase to a plant and switches banks of capacitors to maintain a target power factor. </p>
+
+          <!-- <img class="svc-shot-lv-electrical-services" src="{% static 'images/pq/dvdt.png' %}" alt="dv/dt Filter – CMMS Screenshot"> -->
+
+          <button class="svc-cta-lv-electrical-services" data-detail="svg" aria-label="Learn more about dv/dt Filter">
+            <span class="arrow-lv-electrical-services">Learn more</span>
+          </button>
+        </article>
+
+        <!-- Single details block (opens for one card at a time) -->
+        <div class="svc-detail-lv-electrical-services" id="svcDetail" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+  <section id="solutions" class="section-solutions-solar-system-solution">
+    <div class="container-solar-system">
+      <div class="solutions-head-solar-system-solution">
+        <div>
+          <p class="solutions-kicker-solar-system-solution reveal-solar-system reveal-top-solar-system-solution">
+            Our Solutions
+          </p>
+          <h2 class="solutions-title-solar-system-solution reveal-solar-system reveal-bottom-solar-system-solution">
+            Discover Our Power Quality Solutions
+          </h2>
+          <p class="solutions-subtitle-solar-system-solution reveal-solar-system reveal-bottom-solar-system-solution"
+            style="max-width: 70ch; margin-top: .35rem;">
+            We design, supply, integrate, and service <strong>power quality panels and systems</strong> that protect
+            equipment,
+            improve efficiency, and maintain stable, compliant electrical performance across industrial and commercial
+            sites.
+          </p>
+        </div>
+
+        <button id="solutions-toggle-btn-solar-system-solution" class="solutions-viewall-btn-solar-system-solution"
+          type="button" aria-expanded="false">
+          View All Solutions
+        </button>
+      </div>
+
+      <div id="solutions-grid-solar-system-solution"
+        class="grid-solutions-solar-system-solution is-collapsed-solar-system-solution">
+        <!-- 1: Active Harmonic Filter (AHF) -->
+        <article class="card-solar-system-solution reveal-solar-system reveal-left-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Active Harmonic Filter (AHF)</h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> Reduce harmonic distortion from nonlinear loads (VFDs, LED lighting, UPS,
+              etc.).</p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Real-time harmonic compensation.</li>
+              <li>Handles multiple harmonics up to the 50th order.</li>
+              <li>Reduces energy loss due to harmonic currents.</li>
+              <li>Supports compliance with IEEE and IEC standards.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 2: Power Factor Correction Panels (PFC) -->
+        <article class="card-solar-system-solution reveal-solar-system reveal-top-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Power Factor Correction Panels (PFC)</h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> Compensate reactive power to improve power factor and system efficiency.</p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Minimizes reactive power.</li>
+              <li>Reduces electricity bills by improving the power factor.</li>
+              <li>Improves overall system efficiency.</li>
+              <li>Manual or automatic control options.</li>
+            </ul>
+          </div>
+        </article>
+
+
+        <!-- 4: Voltage Stabilisation & Sag Correction (Stabilizer + DVR) -->
+        <article
+          class="card-solar-system-solution extra-card-solar-system-solution reveal-solar-system reveal-top-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Voltage Stabilisation &amp; Sag Correction (Stabilizer + DVR)
+          </h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> Stabilize voltage and rapidly correct sags/momentary interruptions to protect
+              critical loads.</p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Regulates overvoltage and undervoltage conditions.</li>
+              <li>Instantly restores voltage during sags or brief outages.</li>
+              <li>Maintains continuity of operations in critical systems.</li>
+              <li>Protects motors, compressors, and sensitive electronics.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 3: Surge Protection Panels -->
+        <article class="card-solar-system-solution reveal-solar-system reveal-right-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Surge Protection Panels</h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> Protect electrical systems from transient overvoltages due to lightning,
+              switching, or disturbances.</p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Shields against short-term voltage spikes.</li>
+              <li>Enhances the lifespan of electrical equipment.</li>
+              <li>Improves system reliability.</li>
+            </ul>
+          </div>
+        </article>
+        <!-- 5: Uninterruptible Power Supply (UPS) -->
+        <article
+          class="card-solar-system-solution extra-card-solar-system-solution reveal-solar-system reveal-bottom-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Uninterruptible Power Supply (UPS)</h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> Provide backup power in case of grid failure or power disruptions.</p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Prevents downtime during power outages.</li>
+              <li>Protects against voltage surges, sags, and transients.</li>
+              <li>Ensures data integrity and equipment safety.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 6: Load Bank Panels -->
+        <article
+          class="card-solar-system-solution extra-card-solar-system-solution reveal-solar-system reveal-right-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Load Bank Panels</h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> Simulate full load on an electrical system or generator to verify performance.
+            </p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Verifies that backup systems can handle full load.</li>
+              <li>Ensures reliable operation of generators and UPS systems.</li>
+              <li>Used for commissioning and maintenance of electrical systems.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 7: Energy Management System (EMS) Panels -->
+        <article
+          class="card-solar-system-solution extra-card-solar-system-solution reveal-solar-system reveal-left-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Energy Management System (EMS) Panels</h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> Monitor, control, and optimize energy consumption across different systems.</p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Provides real-time monitoring of energy consumption.</li>
+              <li>Identifies areas for energy saving and optimization.</li>
+              <li>Enhances energy efficiency and reduces utility costs.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 8: Frequency Converter Panels -->
+        <article
+          class="card-solar-system-solution extra-card-solar-system-solution reveal-solar-system reveal-bottom-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Frequency Converter Panels</h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> Convert supply frequency (e.g., 50 Hz to 60 Hz) to match equipment
+              requirements.</p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Ensures equipment operates at the correct frequency.</li>
+              <li>Protects against frequency-related damage.</li>
+              <li>Enhances the efficiency of frequency-sensitive equipment.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- 9: Integrated Power Quality Panel -->
+        <article
+          class="card-solar-system-solution extra-card-solar-system-solution reveal-solar-system reveal-right-solar-system-solution">
+          <h3 class="card-title-solar-system-solution">Integrated Power Quality Panel</h3>
+
+          <div class="card-text-solar-system-solution">
+            <p><strong>Purpose:</strong> A comprehensive solution integrating multiple power quality devices into one
+              panel.</p>
+            <p class="card-benefits-title-solar-system-solution"><strong>Benefits:</strong></p>
+            <ul class="card-benefits-list-solar-system-solution">
+              <li>Combines several technologies into one coordinated panel.</li>
+              <li>Provides holistic power quality management.</li>
+              <li>Reduces the risk of equipment failure and nuisance trips.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section-why-le-electrical-why-us" id="why-us">
+    <div class="container-le-electrical-why-us">
+      <div class="grid-le-electrical-why-us">
+        <!-- LEFT: dark content panel -->
+        <div class="left-le-electrical-why-us">
+          <div class="left-le-electrical-why-us2">
+            <a href="#why-us" class="eyebrow-le-electrical-why-us reveal-left-le-electrical-why-us">
+              <span class="bolt-le-electrical-why-us" aria-hidden="true">⚡</span> Why Choose Us
+            </a>
+
+            <h2 class="title-le-electrical-why-us reveal-left-le-electrical-why-us">
+
+
+              Key Benefits of Power <br>Quality Panels
+            </h2>
+
+            <div class="cards-le-electrical-why-us">
+              <!-- Card 1 -->
+              <article class="card-le-electrical-why-us reveal-top-le-electrical-why-us">
+                <!-- <div class="card-icon-le-electrical-why-us" aria-hidden="true">🛠️</div> -->
+                <h3 class="card-title-le-electrical-why-us">Enhanced Equipment Lifespan</h3>
+                <p class="card-text-le-electrical-why-us">
+                  Reduces stress on electrical equipment, leading to longer operational life.
+                </p>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="card-le-electrical-why-us reveal-right-le-electrical-why-us">
+                <!-- <div class="card-icon-le-electrical-why-us" aria-hidden="true">⏱️</div> -->
+                <h3 class="card-title-le-electrical-why-us">Reduced Downtime</h3>
+                <p class="card-text-le-electrical-why-us">
+                  Prevents power quality disturbances that could lead to production stops or equipment failure.
+                </p>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="card-le-electrical-why-us reveal-left-le-electrical-why-us">
+                <!-- <div class="card-icon-le-electrical-why-us" aria-hidden="true">🛡️</div> -->
+                <h3 class="card-title-le-electrical-why-us">Cost Savings</h3>
+                <p class="card-text-le-electrical-why-us">
+                  Improves energy efficiency, reduces electricity bills, and avoids penalties for low power factor.
+                </p>
+              </article>
+
+              <!-- Card 4 -->
+              <article class="card-le-electrical-why-us reveal-bottom-le-electrical-why-us">
+                <!-- <div class="card-icon-le-electrical-why-us" aria-hidden="true">💬</div> -->
+                <h3 class="card-title-le-electrical-why-us">Compliance</h3>
+                <p class="card-text-le-electrical-why-us">
+                  Ensures compliance with industry standards and regulations (e.g., IEEE, IEC).
+                </p>
+              </article>
+            </div>
+
+
+            <p class="footnote-le-electrical-why-us reveal-left-le-electrical-why-us">
+              Need reliable electrical solutions?
+              <a href="#contact">Contact us today for expert service!</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT: image -->
+        <figure class="media-le-electrical-why-us reveal-right-le-electrical-why-us">
+          <img src="{% static 'images/why-us.avif' %}" alt="Professional electrical tools"
+            class="img-le-electrical-why-us">
+        </figure>
+
+        <!-- Floating circular CTA (rotates gently) -->
+        <a href="#contact" class="floating-cta-le-electrical-why-us" aria-label="Contact Us">
+          <span>Contact<br>Us</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========= POWER QUALITY PROCESS (same structure & icons) ========= -->
+  <section class="section-process-lv-electrical-process" id="work-process">
+    <div class="container-lv-electrical-process reveal-left-lv-electrical-services">
+      <div class="grid-lv-electrical-process reveal-left-lv-electrical-services">
+        <!-- Left: media + intro -->
+        <div class="intro-lv-electrical-process reveal-left-lv-electrical-process">
+          <a href="#work-process" class="eyebrow-lv-electrical-process">
+            <!-- <img src="{% static 'images/icons/testing.png' %}" alt="" class="bolt-icon-lv-electrical-process reveal-left-lv-electrical-services" /> -->
+            Our Process
+          </a>
+
+          <figure class="media-lv-electrical-process">
+            <img src="{% static 'images/process.avif' %}" alt="Power quality assessment and commissioning"
+              class="img-lv-electrical-process">
+          </figure>
+
+          <h2 class="title-lv-electrical-process reveal-left-lv-electrical-services">Power Quality Project Workflow</h2>
+          <p class="lead-lv-electrical-process reveal-left-lv-electrical-services">
+            A standards-driven workflow covering <strong>PQ audits, design & simulation, manufacturing,
+              installation</strong> and
+            <strong>commissioning</strong> of PFC, RTPFC, Active/Passive/Hybrid Filters, and sine-wave/dv/dt solutions.
+          </p>
+
+          <a href="#projects" class="btn-orange-lv-electrical-services">View Projects</a>
+        </div>
+
+        <!-- Right: vertical timeline -->
+        <div class="timeline-lv-electrical-process reveal-right-lv-electrical-process">
+          <ol class="timeline-list-lv-electrical-process">
+            <!-- Step 1 -->
+            <li class="timeline-item-lv-electrical-process">
+              <div class="step-icon-lv-electrical-process">
+                <img src="{% static 'images/icons/consultation.png' %}" alt="Assessment & PQ Audit">
               </div>
-            </div>
-            <img
-              src="https://cdn.prod.website-files.com/688c8eda82b85f5593a8831c/688c91774c4c9e40458b21d3_fbd5f6d2-98e0-421f-a563-a16743089aea.avif"
-              alt="Client Logo" class="testimonial-logo" />
-          </div>
+              <div class="step-content-lv-electrical-process">
+                <h3 class="step-title-lv-electrical-process reveal-right-lv-electrical-process">Assessment &amp; PQ
+                  Audit</h3>
+                <p class="step-text-lv-electrical-process">
+                  Site survey, load profiling, data logging; THD/voltage flicker/imbalance checks; PFC requirement
+                  study;
+                  compliance gap to IEEE&nbsp;519/IEC standards; risk &amp; savings report.
+                </p>
+              </div>
+            </li>
+
+            <!-- Step 2 -->
+            <li class="timeline-item-lv-electrical-process">
+              <div class="step-icon-lv-electrical-process">
+                <img src="{% static 'images/icons/inspection.png' %}" alt="Design & Simulation">
+              </div>
+              <div class="step-content-lv-electrical-process">
+                <h3 class="step-title-lv-electrical-process reveal-right-lv-electrical-process">Design &amp; Simulation
+                </h3>
+                <p class="step-text-lv-electrical-process">
+                  Filter topology selection (Active/Passive/Hybrid, detuned/tuned); kvar/Amp sizing; NEPLAN-based
+                  studies;
+                  protection coordination; panel GA &amp; BOM; performance guarantees vs targets.
+                </p>
+              </div>
+            </li>
+
+            <!-- Step 3 -->
+            <li class="timeline-item-lv-electrical-process">
+              <div class="step-icon-lv-electrical-process">
+                <img src="{% static 'images/icons/repair.png' %}" alt="Manufacturing & FAT">
+              </div>
+              <div class="step-content-lv-electrical-process">
+                <h3 class="step-title-lv-electrical-process reveal-right-lv-electrical-process">Manufacturing &amp; FAT
+                </h3>
+                <p class="step-text-lv-electrical-process">
+                  Panel fabrication (APFC/RTPFC/AHF/Hybrid/Sine-wave/dv/dt); wiring &amp; functional tests; controller
+                  programming; FAT with test reports; logistics &amp; site readiness checklist.
+                </p>
+              </div>
+            </li>
+
+            <!-- Step 4 -->
+            <li class="timeline-item-lv-electrical-process">
+              <div class="step-icon-lv-electrical-process">
+                <img src="{% static 'images/icons/testing.png' %}" alt="Installation, Commissioning & Handover">
+              </div>
+              <div class="step-content-lv-electrical-process">
+                <h3 class="step-title-lv-electrical-process reveal-right-lv-electrical-process">Installation,
+                  Commissioning &amp; Handover</h3>
+                <p class="step-text-lv-electrical-process">
+                  Mounting, cabling, earthing; protection &amp; interlocks; tuning &amp; baseline THD/PF verification;
+                  SCADA/PQ
+                  meter integration; O&amp;M training; final compliance report &amp; after-sales support plan.
+                </p>
+              </div>
+            </li>
+          </ol>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="event-section">
-    <div class="event-wrapper">
-      <h3 class="event-title">Advance asset reliability</h3>
-      <p class="event-subtitle">Industry webinars and demos. See how digital solutions drive operational excellence.</p>
+  <section class="lv-electric-panel-project" id="projects">
+    <div class="lv-epp-container">
+      <header class="lv-epp-header">
+        <p class="lv-epp-kicker">Past Project Experience</p>
+        <h2>Electrical Panels & Switchboards</h2>
+      </header>
 
-      <div class="event-tabs">
-        <button onclick="showDay('day10')" class="event-tab active">Fri 10 Feb</button>
-        <button onclick="showDay('day14')" class="event-tab">14 Feb</button>
-        <button onclick="showDay('day17')" class="event-tab">Sun 17 Feb</button>
-      </div>
-
-      <!-- 10 Feb -->
-      <div class="event-day" id="day10" style="display:block">
-        <!-- Card 1 -->
-        <div class="event-card">
-          <div class="event-img" style="background-image: url('../static/images/event.avif'); position: relative;">
-            <div
-              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.5); z-index: 1;">
-            </div>
+      <div class="lv-epp-grid">
+        <!-- 1 (visible) -->
+        <article class="lv-epp-card reveal-left is-visible">
+          <figure class="lv-epp-media">
+            <img src="{% static 'images/project1.avif' %}" alt="ABB customised main switchboard under test" />
+            <span class="lv-epp-year">2024</span>
+          </figure>
+          <div class="lv-epp-body">
+            <h3>Supply &amp; installation 200 KVAR RTPFC Panel</h3>
+            <p class="lv-epp-client"><strong>Location :</strong> Fiji</p>
+            <ul class="lv-epp-points">
+              <li><strong>Scope of Work : </strong>Supply installation and commissioning of 200 KVAR Real Time Power
+                factor correction unit for stone crusher industry. </li>
+            </ul>
           </div>
+        </article>
 
-          <div class="event-content">
-            <p class="event-time">8:00am – 9:00am</p>
-            <h4 class="event-topic">Optimising maintenance with CARL</h4>
-            <p class="event-speaker"><strong>Speaker:</strong> Alex Jordan</p>
-            <p class="event-details"><strong>Details:</strong> Strategies for predictive maintenance and asset lifecycle
-              management with EAM tools.</p>
-            <button class="event-button">View</button>
+        <!-- 2 (visible) -->
+        <article class="lv-epp-card reveal-right is-visible">
+          <figure class="lv-epp-media">
+            <img src="{% static 'images/project2.avif' %}" alt="High-current ABB distribution board" />
+            <span class="lv-epp-year">2023</span>
+          </figure>
+          <div class="lv-epp-body">
+            <h3>Supply of 400 KVAR PFCU Panel</h3>
+            <p class="lv-epp-client"><strong>Location :</strong> Fiji</p>
+            <ul class="lv-epp-points">
+              <li><strong>Scope of Work :</strong> Supply of 400 KVAR power factor correction panel unit for food
+                industry to balance their load.</li>
+            </ul>
           </div>
+        </article>
+
+        <!-- 3 (visible) -->
+        <article class="lv-epp-card reveal-left is-visible">
+          <figure class="lv-epp-media">
+            <img src="{% static 'images/project3.avif' %}" alt="Stainless-steel junction boxes with prewired panels" />
+            <span class="lv-epp-year">2022</span>
+          </figure>
+          <div class="lv-epp-body">
+            <h3>Supply of 3800 KVAR AHPFC Panel</h3>
+            <p class="lv-epp-client"><strong>Location :</strong> Fiji</p>
+            <ul class="lv-epp-points">
+              <li><strong>Scope of Work :</strong> Supply of 3800 KVAR Automatic harmonic power factor correction panel.
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- “More Projects” button after first row -->
+        <div class="lv-epp-more-wrap">
+          <button type="button" class="lv-epp-more" id="lvEppMoreBtn">More Projects</button>
         </div>
 
-        <!-- Card 2 -->
-        <div class="event-card">
-          <div class="event-img" style="background-image: url('../static/images/event.avif'); position: relative;">
-            <div
-              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.5); z-index: 1;">
-            </div>
-          </div>
-          <div class="event-content">
-            <p class="event-time">10:00am – 11:00am</p>
-            <h4 class="event-topic">Digital transformation in utilities</h4>
-            <p class="event-speaker"><strong>Speaker:</strong> Taylor Brooks</p>
-            <p class="event-details"><strong>Details:</strong> Centralise operations, automate compliance, and improve
-              reliability with integrated platforms.</p>
-            <button class="event-button">View</button>
-          </div>
-        </div>
-      </div>
+        <!-- 6) 2021–2022 (LV Power + Aerial) - hidden initially -->
+        <article class="lv-epp-card reveal-right is-hidden">
+          <figure class="lv-epp-media">
+            <img src="{% static 'images/project5.avif' %}" alt="LV power and aerial cable supply" />
+            <span class="lv-epp-year">2021</span>
+          </figure>
+          <div class="lv-epp-body">
+            <h3>Supply & installation 100, 300 KVAR 440V PFCU Panel</h3>
+            <p class="lv-epp-client"><strong>Location :</strong> Fiji</p>
+            <ul class="lv-epp-points">
+              <li><strong>Scope of Work :</strong> Supply installation and commissioning of 100 & 300 KVAR Power factor
+                correction panel to wood industries to maintain their PF and balance load.</li>
 
-      <!-- 14 Feb -->
-      <div class="event-day" id="day14" style="display:none">
-        <div class="event-card">
-          <div class="event-img" style="background-image: url('../static/images/event.avif'); position: relative;">
-            <div
-              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.5); z-index: 1;">
-            </div>
+            </ul>
           </div>
-          <div class="event-content">
-            <p class="event-time">2:00pm – 3:00pm</p>
-            <h4 class="event-topic">Mobile workforce enablement</h4>
-            <p class="event-speaker"><strong>Speaker:</strong> Morgan Ellis</p>
-            <p class="event-details"><strong>Details:</strong> Empower field teams with mobile apps for real-time data
-              and offline access.</p>
-            <button class="event-button">View</button>
-          </div>
-        </div>
+        </article>
 
-        <div class="event-card">
-          <div class="event-img" style="background-image: url('../static/images/event.avif'); position: relative;">
-            <div
-              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.5); z-index: 1;">
-            </div>
-          </div>
-          <div class="event-content">
-            <p class="event-time">11:00am – 12:00pm</p>
-            <h4 class="event-topic">IoT for predictive maintenance</h4>
-            <p class="event-speaker"><strong>Speaker:</strong> Casey Ellis</p>
-            <p class="event-details"><strong>Details:</strong> Reduce downtime and boost asset performance with IoT
-              sensors and analytics.</p>
-            <button class="event-button">View</button>
-          </div>
-        </div>
-      </div>
+         <article class="lv-epp-card reveal-right is-hidden">
+          <figure class="lv-epp-media">
+            <img src="{% static 'images/project6.avif' %}" alt="LV power and aerial cable supply" />
+            <span class="lv-epp-year">2020</span>
+          </figure>
+          <div class="lv-epp-body">
+            <h3>Supply & installation 25 KVAR 440V APFC Panel</h3>
+            <p class="lv-epp-client"><strong>Location :</strong> Australia</p>
+            <ul class="lv-epp-points">
+              <li><strong>Scope of Work :</strong> Supply & installation of 25 KVAR, 440 V used to reduce reactive power in commercial electrical systems, enhancing energy efficiency and lowering utility charges.</li>
 
-      <!-- 17 Feb -->
-      <div class="event-day" id="day17" style="display:none">
-        <div class="event-card">
-          <div class="event-img" style="background-image: url('../static/images/event.avif'); position: relative;">
-            <div
-              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.5); z-index: 1;">
-            </div>
+            </ul>
           </div>
-          <div class="event-content">
-            <p class="event-time">9:00am – 10:00am</p>
-            <h4 class="event-topic">Geospatial asset tracking</h4>
-            <p class="event-speaker"><strong>Speaker:</strong> Jordan Avery</p>
-            <p class="event-details"><strong>Details:</strong> Integrate GIS for spatial visualisation and smarter asset
-              decisions.</p>
-            <button class="event-button">View</button>
-          </div>
-        </div>
+        </article>
 
-        <div class="event-card">
-          <div class="event-img" style="background-image: url('../static/images/event.avif'); position: relative;">
-            <div
-              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.5); z-index: 1;">
-            </div>
+
+        <!-- 6) 2021–2022 (LV Power + Aerial) - hidden initially -->
+        <article class="lv-epp-card reveal-right is-hidden">
+          <figure class="lv-epp-media">
+            <img src="{% static 'images/project4.avif' %}" alt="LV power and aerial cable supply" />
+            <span class="lv-epp-year">2017</span>
+          </figure>
+          <div class="lv-epp-body">
+            <h3>Supply & installation 15.9, 20, 40, 50, 160, 500 KVAR 440V PFCU Panel</h3>
+            <p class="lv-epp-client"><strong>Location :</strong> Fiji</p>
+            <ul class="lv-epp-points">
+              <li> <strong>Scope of Work :</strong> Supply installation and commissioning of 8 Power factor correction
+                panel for Water Authority.</li>
+
+            </ul>
           </div>
-          <div class="event-content">
-            <p class="event-time">3:00pm – 4:00pm</p>
-            <h4 class="event-topic">Financial integration best practices</h4>
-            <p class="event-speaker"><strong>Speaker:</strong> Stacy Shaw</p>
-            <p class="event-details"><strong>Details:</strong> Align asset management with ERP for seamless budgeting
-              and reporting.</p>
-            <button class="event-button">View</button>
-          </div>
-        </div>
+        </article>
+
+
+
+
       </div>
     </div>
   </section>
 
-  <section class="faq-section">
-    <div class="faq-header">
-      <p class="faq-subtitle">FREQUENTLY ASKED QUESTIONS</p>
-      <h2 class="faq-title">Get the answers you need</h2>
-      <p class="faq-desc">
-        Explore our solutions for asset management, digital transformation, and the CARL platform.
+
+
+  <section id="about-us" class="cmms-contact-form-wrap">
+    <div class="cmms-contact-form-inner">
+
+      <a href="#contact" class="cmms-contact-form-badge2 reveal-up">
+        <p class="eyebrow-neplan-what-we-bring reveal-up">About us</p>
+      </a>
+
+      <h2 class="title-meet-ieng-about reveal-up">
+        About us – where vision meets execution!
+      </h2>
+
+
+
+      <p class="about-text-abou-ieng reveal-up">
+        iEngineering is your trusted partner for advanced electrical and energy solutions across Australia, Fiji, and
+        India. We deliver high-quality hardware products from switchboards and transformers to solar, BESS, and EV
+        charging systems backed by expert engineering, reliable installation, and dedicated local support.</strong>
       </p>
-    </div>
 
-    <div class="faq-grid">
-      <div class="faq-card">
-        <h4>What is enterprise asset management?</h4>
-        <p>Enterprise asset management centralises and streamlines the lifecycle of physical assets, ensuring
-          compliance, efficiency, and reliability for critical infrastructure.</p>
-      </div>
-      <div class="faq-card">
-        <h4>How does CARL integrate with other systems?</h4>
-        <p>CARL connects with SCADA, BMS, GIS, ERP, and IoT platforms for unified data, automated workflows, and
-          real-time operational visibility.</p>
-      </div>
-      <div class="faq-card">
-        <h4>Who benefits from using CARL?</h4>
-        <p>Organisations in utilities, airports, ports, government, energy, mining, transport, and manufacturing with
-          complex asset networks benefit from CARL.</p>
-      </div>
-      <div class="faq-card">
-        <h4>What mobile capabilities are available?</h4>
-        <p>The CARL Touch app enables technicians to access asset data, complete checklists, and work offline for
-          efficient field operations.</p>
-      </div>
-      <div class="faq-card">
-        <h4>How is data migration handled?</h4>
-        <p>We securely migrate asset and maintenance data from legacy systems or spreadsheets, ensuring a seamless
-          transition with minimal disruption.</p>
-      </div>
-      <div class="faq-card">
-        <h4>What support is offered post-implementation?</h4>
-        <p>Ongoing support, training, and system optimisation are provided to ensure continuous improvement and
-          long-term value.</p>
-      </div>
-    </div>
-  </section>
-  <section class="contact-expert-section">
-    <div class="expert-header">
-      <h2>Connect with our asset experts</h2>
-    </div>
-
-    <div class="expert-grid">
-      <div class="expert-card">
-        <img src="{% static 'images/general.avif' %}" alt="Technical Assistance" />
-        <h4>Technical assistance</h4>
-        <p>Get expert support for EAM, maintenance, and integration. Reliable solutions for your operations.</p>
-        <button>Support</button>
-      </div>
-      <div class="expert-card">
-        <img src="{% static 'images/general.avif' %}" alt="Sales Inquiries" />
-        <h4>Sales inquiries</h4>
-        <p>Request demos, pricing, or discuss custom asset management solutions.</p>
-        <button>Demo</button>
-      </div>
-      <div class="expert-card">
-        <img src="{% static 'images/general.avif' %}" alt="General Inquiries" />
-        <h4>General inquiries</h4>
-        <p>Reach out for service info, partnerships, or other topics.</p>
-        <button>Ask</button>
-      </div>
     </div>
   </section>
 
+
+  <section class="-gemini-mission-section">
+
+
+    <div class="-gemini-content-wrapper">
+      <div class="-gemini-tabs-container">
+        <button class="-gemini-tab active" data-tab="mission">Mission</button>
+        <button class="-gemini-tab" data-tab="vision">Vision</button>
+        <button class="-gemini-tab" data-tab="values">Values</button>
+      </div>
+      <div class="-gemini-content active reveal-mobility" id="mission-content">
+        <div class="-gemini-text-content">
+          <h2 class="title-meet-ieng-about reveal-mobility">Our Mission</h2>
+          <p class="reveal-mobility">At iEngineering Australia, our mission is to enhance efficiency, ensure quality
+            control, and deliver customer satisfaction through innovative engineering solutions. We are committed to
+            global standards and sustainable solutions that create long-term value for our clients and communities.</p>
+        </div>
+        <div class="-gemini-image-content reveal-mobility">
+          <img src="{% static 'images/mission.avif' %}" alt="Mission Image">
+        </div>
+      </div>
+
+      <div class="-gemini-content" id="vision-content">
+        <div class="-gemini-text-content reveal-mobility">
+          <h2 class="title-meet-ieng-about reveal-mobility">Our Vision</h2>
+          <p class="reveal-mobility">Our vision is to be a global leader in engineering solutions, driving industry
+            leadership, innovation, and customer-centric growth. We aim to inspire through global influence, foster
+            expansion and growth, and play an inspirational role in shaping the future of engineering.</p>
+        </div>
+        <div class="-gemini-image-content reveal-mobility">
+          <img src="{% static 'images/vision.avif' %}" alt="Vision Image">
+        </div>
+      </div>
+
+      <div class="-gemini-content reveal-mobility" id="values-content">
+        <div class="-gemini-text-content">
+          <h2 class="title-meet-ieng-about reveal-mobility">Our Values</h2>
+          <p class="reveal-mobility">Our values guide everything we do: integrity & ethics, a strong commitment to
+            quality, and diversity & inclusion. Safety, reliability, and continuous improvement are the cornerstones of
+            our success, enabling us to deliver trusted and innovative solutions worldwide.</p>
+        </div>
+        <div class="-gemini-image-content reveal-mobility">
+          <img src="{% static 'images/values.avif' %}" alt="Values Image">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-meet-ieng-about" id="team">
+    <div class="container-meet-ieng-about">
+      <header class="header-meet-ieng-about">
+        <p class="eyebrow-neplan-what-we-bring reveal-up">Our Journey</p>
+        <!-- <h2 class="title-meet-ieng-about reveal-up"></h2> -->
+        <p class="subtitle-meet-ieng-about reveal-up">
+          Founded in 2013, iEngineering Australia delivers a comprehensive range of high-quality electrical and energy
+          hardware solutions tailored for Australian and Pacific conditions. From design and engineering to
+          manufacturing, testing, and commissioning support, we ensure every product whether switchboards, transformers,
+          solar systems, or EV chargers is safe, reliable, and built to last.
+        </p>
+      </header>
+
+
+    </div>
+  </section>
+
+  <section class="section-meet-ieng-about" id="team">
+    <div class="container-meet-ieng-about">
+      <header class="header-meet-ieng-about">
+        <p class="eyebrow-neplan-what-we-bring reveal-up">Where We Operate</p>
+
+        <p class="subtitle-meet-ieng-about reveal-up saw">
+          iEngineering Australia operates across Australia, Fiji, and India, delivering reliable technology and asset
+          management solutions to organizations of all sizes-from local enterprises to large multinational companies.
+
+
+        </p>
+      </header>
+
+
+
+      <!-- =======================
+     NEPLAN - Locations
+     ======================= -->
+      <section class="neplan-locations-wrap">
+        <div class="neplan-locations-grid">
+
+          <!-- Australia – Sydney -->
+          <article class="neplan-locations-card neplan-locations-card--au">
+            <header class="neplan-locations-header">
+              <span class="neplan-locations-icon" aria-hidden="true">
+                <!-- Location pin -->
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                  <path
+                    d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
+                    fill="currentColor" />
+                </svg>
+              </span>
+              <h3 class="neplan-locations-title reveal-right">Australia – Sydney</h3>
+            </header>
+
+            <p class="neplan-locations-phone reveal-right"><strong>Phone:</strong> +61 (02) 8318 1490</p>
+            <p class="neplan-locations-email reveal-right">
+              <strong class="reveal-right reveal-right">Email:</strong>
+              <a href="mailto:enquiries@iengaust.com.au reveal-right">enquiries@iengaust.com.au</a>
+            </p>
+            <p class="neplan-locations-address reveal-right">
+              Warawara Cct, Quakers Hill NSW 2763, Australia
+            </p>
+
+            <a class="neplan-locations-map reveal-right" target="_blank" rel="noopener"
+              href="https://www.google.com/maps/place/iEngineering+Australia/@-33.7235328,150.8746483,349m/data=!3m3!1e3!4b1!5s0x6b12994c8f100b83:0xc573a44ab66823ee!4m6!3m5!1s0x1b47c40472e681d:0x111e8f0e95cba38f!8m2!3d-33.7235345!4d150.8756411!16s%2Fg%2F11b7cc3cnq?hl=en-US&entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D">
+              View map
+            </a>
+          </article>
+
+          <!-- India – Pune -->
+          <article class="neplan-locations-card neplan-locations-card--in">
+            <header class="neplan-locations-header">
+              <span class="neplan-locations-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                  <path
+                    d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
+                    fill="currentColor" />
+                </svg>
+              </span>
+              <h3 class="neplan-locations-title reveal-right">India – Pune</h3>
+            </header>
+
+            <p class="neplan-locations-phone reveal-right"><strong>Phone:</strong> +91 9168627258</p>
+            <p class="neplan-locations-email reveal-right">
+              <strong>Email:</strong>
+              <a href="mailto:shila@iengaust.com.au reveal-right">shila@iengaust.com.au</a>
+            </p>
+            <p class="neplan-locations-address reveal-right">
+              Navale IT Zone, Office No. 501, 5th Floor, A-Wing, Near Navale Bridge, Mumbai-Bangalore Highway,
+              Narhe, Pune – 411041.
+            </p>
+
+            <a class="neplan-locations-map reveal-right" target="_blank" rel="noopener"
+              href="https://www.google.com/maps/place/Truecue+iEngineering+India+Pvt+Ltd/@18.4598087,73.820123,796m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3bc2bf393571e765:0x7f82ec8c697cb907!8m2!3d18.4598036!4d73.8226979!16s%2Fg%2F11g2wv4fpd?hl=en-US&entry=ttu&g_ep=EgoyMDI1MTEwOS4wIKXMDSoASAFQAw%3D%3D">
+              View map
+            </a>
+          </article>
+
+          <!-- Fiji – Suva -->
+          <article class="neplan-locations-card neplan-locations-card--fj">
+            <header class="neplan-locations-header">
+              <span class="neplan-locations-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                  <path
+                    d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"
+                    fill="currentColor" />
+                </svg>
+              </span>
+              <h3 class="neplan-locations-title reveal-right">Fiji – Suva</h3>
+            </header>
+
+            <p class="neplan-locations-phone reveal-right"><strong>Phone:</strong> +679 9488589</p>
+            <p class="neplan-locations-email reveal-right">
+              <strong>Email:</strong>
+              <a href="mailto:enquiries@iengaust.com.au reveal-right">enquiries@iengaust.com.au</a>
+            </p>
+            <p class="neplan-locations-address reveal-right">
+              Lot 17, River Drive, Pacific Harbour, Navua, Suva, Fiji.
+            </p>
+
+            <a class="neplan-locations-map reveal-right" target="_blank" rel="noopener"
+              href="https://www.google.com/maps/search/Lot+17,+River+Drive+Pacific+Harbour+Navua+Suva+Fiji/">
+              View map
+            </a>
+          </article>
+
+        </div>
+      </section>
+
+
+    </div>
+  </section>
+  <section id="contact">
+
+
+    {% include "components/contact_block.html" with form_only=True %}
+
+  </section>
   {% include 'footer.html' %}
+
   <!-- Link to Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-  <script src="{% static 'js/main.js'%}"></script>
+  <script defer src="{% static 'js/demo_form.js' %}"></script>
+  <script defer src="{% static 'js/main.js' %}"></script>
+  <script defer src="{% static 'js/neplan.js'%}"></script>
+
+
+
+  <script>(() => {
+      const SELECTOR = '.reveal-left, .reveal-right, .reveal-up, .reveal-down';
+
+      // Apply per-element delay from data attribute if provided
+      document.querySelectorAll(SELECTOR).forEach(el => {
+        const d = el.getAttribute('data-reveal-delay');
+        if (d) el.style.setProperty('--reveal-delay', /^\d+$/.test(d) ? `${d}ms` : d);
+      });
+
+      // Auto-stagger children inside a .reveal-group
+      document.querySelectorAll('.reveal-group[data-reveal-stagger]').forEach(group => {
+        const step = parseInt(group.dataset.revealStagger, 10) || 120; // ms
+        let i = 0;
+        group.querySelectorAll(SELECTOR).forEach(el => {
+          el.style.setProperty('--reveal-delay', `${i * step}ms`);
+          i++;
+        });
+      });
+
+      // Observe and toggle visibility (replays when scrolling back unless .reveal-once)
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(({ target, isIntersecting }) => {
+          if (isIntersecting) target.classList.add('is-visible');
+          else if (!target.classList.contains('reveal-once'))
+            target.classList.remove('is-visible');
+        });
+      }, { threshold: 0.18 });
+
+      document.querySelectorAll(SELECTOR).forEach(el => io.observe(el));
+    })();</script>
+
+
+
+  <script>
+    (function () {
+      // Reveal on scroll
+      const cards = document.querySelectorAll('.lv-epp-card');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      cards.forEach((card, i) => {
+        // Add alternating direction if not already set
+        if (!card.classList.contains('reveal-left') && !card.classList.contains('reveal-right')) {
+          card.classList.add(i % 2 ? 'reveal-right' : 'reveal-left');
+        }
+        io.observe(card);
+      });
+
+      // More Projects button (reveals hidden cards)
+      const moreBtn = document.getElementById('lvEppMoreBtn');
+      if (moreBtn) {
+        moreBtn.addEventListener('click', () => {
+          document.querySelectorAll('.lv-epp-card.is-hidden').forEach(el => {
+            el.classList.remove('is-hidden');
+            requestAnimationFrame(() => el.classList.add('is-visible'));
+          });
+          moreBtn.closest('.lv-epp-more-wrap').style.display = 'none';
+        });
+      }
+    })();
+  </script>
+
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKQV8LKX" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
 </body>
 
