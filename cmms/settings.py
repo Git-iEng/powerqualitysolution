@@ -25,8 +25,20 @@ SECRET_KEY = 'django-insecure-tpzqxw&&@03wq2yzgf!gzh6u2=044s2j+_!#jioe(#f^6%quzo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+if DEBUG:
+    SECURE_SSL_REDIRECT = False
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False
+else:
+    SECURE_SSL_REDIRECT = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
+
+ALLOWED_HOSTS = ["powerqualitysolution.ieng.tech", ".ieng.tech"]
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+CSRF_TRUSTED_ORIGINS = ["https://*.ieng.tech"]
 
 # Application definition
 
@@ -41,14 +53,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # add here
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = 'cmms.urls'
@@ -128,7 +141,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Where to store the Excel (optional)
-CONTACT_SUBMISSIONS_XLSX = BASE_DIR / "contact_submissions.xlsx"
+
 
 # Email (configure to your provider)
 
@@ -141,13 +154,11 @@ EMAIL_HOST_USER = 'test@ieng.tech'  # Your email address
 EMAIL_HOST_PASSWORD = 'test@iEng'  # Your email password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 CONTACT_RECIPIENTS = [
-    "tushar@iengaust.com.au",
-   "amar@iengaust.com.au", 
-   "kushankur@iengaust.com.au", 
-   "priya@iengaust.com.au", 
+    "shila@iengaust.com.au",
+   "enquiries@iengaust.com.au",
    "test@ieng.tech",
 ]
-CONTACT_RECIPIENTS = [ "tushar@iengaust.com.au","amar@iengaust.com.au", "kushankur@iengaust.com.au", "priya@iengaust.com.au", "test@ieng.tech"]
+CONTACT_RECIPIENTS = ["shila@iengaust.com.au","enquiries@iengaust.com.au", "test@ieng.tech"]
 DEMO_RECIPIENTS = CONTACT_RECIPIENTS
 
 # CONTACT_EMAIL = 'diksha@iengaust.com.au'
