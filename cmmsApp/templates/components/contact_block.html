@@ -5,7 +5,7 @@
     <div class="consult-block__inner">
 
         {% if not form_only %}
-        <!-- Left side (you can replace this content per page) -->
+        <!-- Left side (you can replace this content per page) -->ww
         <aside class="consult-left">
             <span class="consult-badge">Why Choose Us</span>
             <h2 class="consult-title">Join 500+<br>companies<br>trusting us</h2>
@@ -205,40 +205,85 @@
         ensureCountries();
     })();
 </script>
+
 <script>
 (function(){
-  const form    = document.getElementById('consult-form');
-  const submit  = document.getElementById('consult-submit');
+  const form   = document.getElementById('consult-form');
+  const submit = document.getElementById('consult-submit');
+  if (!form || !submit) return;
+
+  let submitting = false;
 
   function startLoading(){
     submit.classList.add('is-loading');
-    submit.disabled = true;                 // only disable the button
-    form.classList.add('is-submitting');    // just a visual/UX class
+    submit.disabled = true;
+    form.classList.add('is-submitting');
   }
+
   function stopLoading(){
+    submitting = false;
     submit.classList.remove('is-loading');
     submit.disabled = false;
     form.classList.remove('is-submitting');
   }
 
-  form && form.addEventListener('submit', function(e){
-    // keep your validate() call if you have one:
-    if (typeof validate === 'function' && !validate()) {
+  // If there are server-side messages, we are on the same page (error/success)
+  // so make sure loading is off.
+  function stopIfMessagesExist(){
+    const hasMsg = document.querySelector('.consult-alert') || document.querySelector('#global-toast.show');
+    if (hasMsg) stopLoading();
+  }
+
+  form.addEventListener('submit', function(e){
+    if (submitting) {
       e.preventDefault();
       return;
     }
-    startLoading();  // spinner + prevent double click
 
-    // IMPORTANT: do NOT disable hidden inputs, especially the CSRF token.
-    // If you previously had: [...form.elements].forEach(el => el.disabled=true)
-    // remove it entirely, or at least skip the token:
-    //   const csrf = form.querySelector('input[name=csrfmiddlewaretoken]');
-    //   [...form.elements].forEach(el => { if (el !== csrf) el.disabled = true; });
+    // If you have validate(), use it. If not, browser required fields still work.
+    if (typeof validate === 'function' && !validate()) {
+      e.preventDefault();
+      stopLoading();
+      return;
+    }
+
+    // Extra safety: if browser HTML5 validation fails, do not spin
+    if (!form.checkValidity()) {
+      // Let browser show errors
+      stopLoading();
+      return;
+    }
+
+    submitting = true;
+    startLoading();
+
+    // Safety timeout so spinner never stays forever if navigation doesn't happen
+    window.clearTimeout(form._safetyTimer);
+    form._safetyTimer = window.setTimeout(() => {
+      if (submitting) {
+        // if your global toast exists use it, else fallback
+        if (window.cmmsToast) window.cmmsToast("Taking too long. Please try again.", "error");
+        else alert("Taking too long. Please try again.");
+        stopLoading();
+      }
+    }, 15000);
   });
 
-  // (optional) In case you ever submit via AJAX and need the token:
-  window.getCsrfToken = () =>
-    (document.querySelector('input[name=csrfmiddlewaretoken]')||{}).value || '';
+  // When user comes back from thanks page using back button (bfcache), reset UI
+  window.addEventListener('pageshow', () => {
+    stopLoading();
+    // optional: clear the form so it is fresh when returning
+    form.reset();
+  });
+
+  // If the page finishes loading and we stayed here, stop spinner
+  window.addEventListener('load', () => {
+    stopLoading();
+    stopIfMessagesExist();
+  });
+
+  // If the form is invalid, this event fires. Ensure spinner is off.
+  form.addEventListener('invalid', () => stopLoading(), true);
+
 })();
 </script>
-
