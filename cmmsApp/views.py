@@ -1,43 +1,27 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse, FileResponse, Http404
 from django.urls import reverse
 from django.conf import settings
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.core.mail import get_connection, EmailMultiAlternatives
-from django.utils import timezone
 from django.contrib import messages
+from django.utils import timezone
+from django.views.decorators.http import require_POST
+from django.core import signing
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.contrib.staticfiles import finders
 
-from pathlib import Path
-from datetime import datetime
 from threading import Thread
-import os, re
-import pandas as pd
+from pathlib import Path
+import mimetypes
+import re
+
 import phonenumbers
 import pycountry
-from phonenumbers import PhoneNumberFormat
-from openpyxl import Workbook, load_workbook
-from openpyxl.utils import get_column_letter
 
 from .forms import ContactForm
-from .utils_excel import append_submission_xlsx
 from .utils_contact import normalize_phone_and_country, country_name_from_alpha2
-from django.http import JsonResponse
-import pycountry, phonenumbers
-import os, mimetypes
-from django.core import signing
-from django.http import FileResponse, Http404, JsonResponse
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt   # not required if you add {% csrf_token %}
-from django.utils import timezone
-from django.conf import settings
-
-from django.contrib.staticfiles import finders
-from django.core import signing
-from django.http import FileResponse, JsonResponse, Http404
-from django.utils import timezone
-from django.views.decorators.http import require_POST
-from django.urls import reverse
 
 
 # ---------- Validation patterns ----------
@@ -45,42 +29,36 @@ NAME_RE  = re.compile(r"^[A-Za-z\s'.-]{2,}$")
 PHONE_RE = re.compile(r"^\+?\d[\d\s\-()]{6,}$")
 
 # ---------- Excel paths ----------
-EXCEL_DIR  = os.path.join(settings.BASE_DIR, "data")
-EXCEL_PATH = os.path.join(EXCEL_DIR, "carl_demo_requests.xlsx")
+# EXCEL_DIR  = os.path.join(settings.BASE_DIR, "data")
+# EXCEL_PATH = os.path.join(EXCEL_DIR, "carl_demo_requests.xlsx")
 
-from django.http import HttpResponse
-from django.contrib.staticfiles.storage import staticfiles_storage
 
-def sitemap(request):
-    with staticfiles_storage.open("sitemap.xml") as f:
-        return HttpResponse(f.read(), content_type="application/xml")
 
-    
 def _static_abs_path(relpath: str) -> str | None:
     """Return absolute path of a static file using Django's staticfiles finders, or None."""
     return finders.find(relpath)
 
 
-def _append_to_excel(row):
-    """Create/append to the Request Demo workbook."""
-    os.makedirs(EXCEL_DIR, exist_ok=True)
-    if os.path.exists(EXCEL_PATH):
-        wb = load_workbook(EXCEL_PATH)
-        ws = wb.active
-    else:
-        wb = Workbook()
-        ws = wb.active
-        ws.title = "Requests"
-        headers = [
-            "Timestamp", "Full Name", "Company", "Email",
-            "Country", "Dial Code", "Phone", "Address",
-            "Message", "Source IP",
-        ]
-        ws.append(headers)
-        for i in range(1, len(headers) + 1):
-            ws.column_dimensions[get_column_letter(i)].width = 24
-    ws.append(row)
-    wb.save(EXCEL_PATH)
+# def _append_to_excel(row):
+#     """Create/append to the Request Demo workbook."""
+#     os.makedirs(EXCEL_DIR, exist_ok=True)
+#     if os.path.exists(EXCEL_PATH):
+#         wb = load_workbook(EXCEL_PATH)
+#         ws = wb.active
+#     else:
+#         wb = Workbook()
+#         ws = wb.active
+#         ws.title = "Requests"
+#         headers = [
+#             "Timestamp", "Full Name", "Company", "Email",
+#             "Country", "Dial Code", "Phone", "Address",
+#             "Message", "Source IP",
+#         ]
+#         ws.append(headers)
+#         for i in range(1, len(headers) + 1):
+#             ws.column_dimensions[get_column_letter(i)].width = 24
+#     ws.append(row)
+#     wb.save(EXCEL_PATH)
 
 
 # ---------- Email helpers ----------
@@ -112,7 +90,6 @@ def _send_email(subject: str, text_body: str, html_body: str | None, recipients:
 
 
 def _send_demo_email_async(subject: str, text_body: str, html_body: str | None = None):
-    """Fire-and-forget email for Request Demo."""
     recipients = getattr(settings, "DEMO_RECIPIENTS", None) or getattr(settings, "CONTACT_RECIPIENTS", None)
     Thread(target=_send_email, args=(subject, text_body, html_body, recipients), daemon=True).start()
 
@@ -122,13 +99,15 @@ def _send_contact_email_async(subject: str, text_body: str, html_body: str | Non
     recipients = getattr(settings, "CONTACT_RECIPIENTS", None)
     Thread(target=_send_email, args=(subject, text_body, html_body, recipients), daemon=True).start()
 
-
-# ---------- Views ----------
 def request_demo_view(request):
     if request.method != "POST":
         return redirect("/")
 
-    # Pull fields
+    # detect ajax/fetch
+
+    wants_json = request.headers.get("x-requested-with") == "XMLHttpRequest"
+     
+
     full_name = request.POST.get("full_name", "").strip()
     company   = request.POST.get("company", "").strip()
     email     = request.POST.get("email", "").strip()
@@ -137,7 +116,6 @@ def request_demo_view(request):
     address   = request.POST.get("address", "").strip()
     message   = request.POST.get("message", "").strip()
 
-    # Validate
     errors = {}
     if not NAME_RE.match(full_name):
         errors["full_name"] = "Please enter a valid full name (letters only)."
@@ -153,27 +131,21 @@ def request_demo_view(request):
         errors["country"] = "Select a country."
 
     if errors:
-        # Raise toasts on next page load
+        # JSON mode: return errors to JS
+        if wants_json:
+            return JsonResponse({"ok": False, "errors": errors}, status=400)
+
+        # normal mode: use messages + redirect back
         for msg in errors.values():
             messages.error(request, msg)
-        # Go back to the page that opened the modal (so your JS toast can show)
         return redirect(request.META.get("HTTP_REFERER", "/"))
 
-    # Split "IN|+91"
     country_code, dial = (country.split("|", 1) + [""])[:2]
 
-    # Excel append
-    _append_to_excel([
-        timezone.now().strftime("%Y-%m-%d %H:%M:%S %Z") or timezone.now().strftime("%Y-%m-%d %H:%M:%S"),
-        full_name, company, email, country_code, dial, phone, address, message,
-        request.META.get("REMOTE_ADDR", ""),
-    ])
-
-    # Build email
     ts = timezone.now().strftime("%Y-%m-%d %H:%M:%S %Z")
-    subject = "New Power quality Solution Inquiry Request"
+    subject = "New Power Quality Solution inquiry"
     text_body = (
-        "A new Power quality Solution Inquiry Request was submitted.\n\n"
+        "A new Power Quality Solution inquiry request was submitted.\n\n"
         f"Submitted: {ts}\n"
         f"IP: {request.META.get('REMOTE_ADDR','')}\n\n"
         f"Full name: {full_name}\n"
@@ -185,8 +157,9 @@ def request_demo_view(request):
         "Message:\n"
         f"{message or '(none)'}\n"
     )
+
     html_body = f"""
-        <h2 style="margin:0 0 8px">Power quality Solution Inquiry Request</h2>
+        <h2 style="margin:0 0 8px">New Power Quality Solution Inquiry Request</h2>
         <p style="margin:0 0 12px;color:#334">Submitted {ts} from {request.META.get('REMOTE_ADDR','')}</p>
         <table cellpadding="6" cellspacing="0" style="border-collapse:collapse;background:#f9fbfc">
           <tr><td><b>Full name</b></td><td>{full_name}</td></tr>
@@ -200,11 +173,17 @@ def request_demo_view(request):
         <pre style="white-space:pre-wrap;font-family:system-ui,Segoe UI,Arial,sans-serif">{message or '(none)'}</pre>
     """
 
+    # send email (sync call but it returns quickly since you call the thread sender)
     _send_demo_email_async(subject, text_body, html_body)
 
-    # Success -> thanks page
-    return redirect(reverse("cmmsApp:contact_thanks"))
+    thanks_url = reverse("cmmsApp:contact_thanks")
 
+    # JSON mode: JS will redirect only when ok=true
+    if wants_json:
+        return JsonResponse({"ok": True, "redirect": thanks_url})
+
+    # normal mode
+    return redirect(thanks_url)
 
 def home(request):
     return render(request, "index.html")
@@ -213,16 +192,15 @@ def home(request):
 def request_demo(request):
     return render(request, "request_demo_modal.html")
 
-
-
-
 def contact(request):     return render(request, "contact.html")
 
 def about(request):       return render(request, "about.html")
 
 
-
-def contact(request):     return render(request, "neplan-contact.html")
+def sitemap(request):
+    with staticfiles_storage.open('sitemap.xml') as sitemap_file:
+        return HttpResponse(sitemap_file, content_type='application/xml')
+# def contact(request):     return render(request, "neplan-contact.html")
 def contact_section(request):
     form = ContactForm(request.POST or None)
 
@@ -237,30 +215,30 @@ def contact_section(request):
             cd.get("phone", ""), cd.get("country", "")
         )
 
-        # Append to Excel
-        xlsx_path = Path(
-            getattr(settings, "CONTACT_SUBMISSIONS_XLSX", Path(settings.BASE_DIR) / "contact_submissions.xlsx")
-        )
-        append_submission_xlsx(
-            xlsx_path,
-            [
-                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                cd["first_name"],
-                cd.get("last_name", ""),
-                cd.get("company", ""),
-                cd["email"],
-                resolved_alpha2,
-                resolved_country_name,
-                e164_phone or cd.get("phone", ""),
-                cd.get("message", ""),
-            ],
-        )
+        # # Append to Excel
+        # xlsx_path = Path(
+        #     getattr(settings, "CONTACT_SUBMISSIONS_XLSX", Path(settings.BASE_DIR) / "contact_submissions.xlsx")
+        # # )
+        # append_submission_xlsx(
+        #     xlsx_path,
+        #     [
+        #         datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #         cd["first_name"],
+        #         cd.get("last_name", ""),
+        #         cd.get("company", ""),
+        #         cd["email"],
+        #         resolved_alpha2,
+        #         resolved_country_name,
+        #         e164_phone or cd.get("phone", ""),
+        #         cd.get("message", ""),
+        #     ],
+        # )
 
         # Email body
-        subject = "New Power quality Solution Inquiry Request"
+        subject = "New website contact submission for Power Quality Solution Inquiry"
         text_body = "\n".join(
             [
-                "New Power quality Solution Inquiry Request:",
+                "New contact submission for Power Quality Solution Inquiry:",
                 f"Name: {cd['first_name']} {cd.get('last_name','')}".strip(),
                 f"Company: {cd.get('company','')}",
                 f"Email: {cd['email']}",
@@ -361,26 +339,26 @@ def contact_block_submit(request):
     e164_phone, alpha2, country_name = normalize_phone_and_country(phone, country)
     dial_code = _dial_code_from_alpha2(alpha2)
 
-    # --- Append to Excel ---
-    xlsx_path = Path(getattr(settings, "CONTACT_SUBMISSIONS_XLSX",
-                             Path(settings.BASE_DIR) / "contact_submissions.xlsx"))
-    # Be liberal with columns; utils will just append the row.
-    append_submission_xlsx(
-        xlsx_path,
-        [
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            name,
-            email,
-            e164_phone or phone,
-            alpha2,
-            country_name,
-            dial_code,
-            service,
-            message,
-            request.META.get("REMOTE_ADDR", ""),
-            request.META.get("HTTP_REFERER", ""),
-        ],
-    )
+    # # --- Append to Excel ---
+    # xlsx_path = Path(getattr(settings, "CONTACT_SUBMISSIONS_XLSX",
+    #                          Path(settings.BASE_DIR) / "contact_submissions.xlsx"))
+    # # Be liberal with columns; utils will just append the row.
+    # append_submission_xlsx(
+    #     xlsx_path,
+    #     [
+    #         datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    #         name,
+    #         email,
+    #         e164_phone or phone,
+    #         alpha2,
+    #         country_name,
+    #         dial_code,
+    #         service,
+    #         message,
+    #         request.META.get("REMOTE_ADDR", ""),
+    #         request.META.get("HTTP_REFERER", ""),
+    #     ],
+    # )
 
     # --- Email notification ---
     subject = f"[Website] Consulting request: {name} – {service or 'General'}"
@@ -404,19 +382,7 @@ def contact_block_submit(request):
     messages.success(request, "Thanks! Your request was submitted successfully.")
     return redirect(reverse("cmmsApp:contact_thanks"))
 
-def neplan_electricity(request):
-    # Build once here
-    countries = []
-    for c in pycountry.countries:
-        try:
-            cc = phonenumbers.country_code_for_region(c.alpha_2)
-        except Exception:
-            cc = None
-        if cc:
-            countries.append({"alpha2": c.alpha_2, "name": c.name, "dial": f"+{cc}"})
-    countries.sort(key=lambda x: x["name"])
 
-    return render(request, "neplan-electricity.html", {"countries": countries})
 
 
 def country_list(request):
@@ -438,13 +404,7 @@ def contact_thanks(request):
 
 
 # --- imports you need at the top of views.py ---
-from pathlib import Path
-import os, mimetypes, re
-from django.http import FileResponse, JsonResponse, Http404
-from django.core import signing
-from django.utils import timezone
-from django.views.decorators.http import require_POST
-from django.urls import reverse
+
 # (and your other imports… NAME_RE, validate_email, etc.)
 
 # ---------- Downloads config ----------

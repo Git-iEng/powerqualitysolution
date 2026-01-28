@@ -809,7 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- DETAILS CONTENT MAP ---
   const detailsMap = {
  rtpfc: {
-  title: 'Real-Time Power Factor Correction (RTPFC)',
+  title: 'Real-Time Power Factor Correction Panel (RTPFC)',
   body: `
     <p>
       <strong>RTPFC panels</strong> integrate a CRCA powder-coated MS enclosure, self-healing MPP capacitors,
@@ -1057,9 +1057,59 @@ dvdtFilter: {
     src: '../static/images/types/type7.avif',
     alt: 'DV/DT FILTER'
   }
+
+  
 },
 
 
+svg: {
+  title: 'Static Var Generator (SVG)',
+  body: `
+
+    <p><strong>Frequency:</strong> 50/60Hz</p>
+
+    <p>
+      <strong>A Revolutionary New Power Factor System – Static Var Generator (SVG)</strong><br/>
+      Automatic power factor correction equipment is widely used in industry to ensure optimal utilization of the
+      electrical network. Typically, such power factor correction involves an automatic controller that monitors the
+      incoming phase to a plant and switches banks of capacitors to maintain a target power factor.
+    </p>
+
+    <p>
+      However, traditional capacitor-based automatic power factor correction systems have significant limitations.
+      They are slow to react to load changes, causing the system to constantly shift between overcompensation and under
+      compensation. In environments rich with harmonics, capacitors can become overloaded, increasing the risk of system
+      resonance, shortening system life expectancy, and causing contactor failures. Overloaded capacitors may also leak,
+      presenting a serious fire hazard.
+    </p>
+
+    <p>
+      The <strong>Static Var Generator (SVG)</strong> offers a completely new approach to power factor correction.
+      Using a high-speed, three-level inverter, the SVG responds quickly to changes in reactive power, delivering
+      corrective reactive power into the system. Full correction is achieved within <strong>3/4 of a cycle</strong>,
+      providing real-time, stable, and accurate power factor correction.
+    </p>
+
+    <p>
+      Unlike traditional systems, the SVG can dynamically and bi-directionally adjust reactive power
+      (both <strong>leading</strong> and <strong>lagging</strong>). There is no risk of system resonance, and even under
+      low voltage conditions, the SVG ensures full reactive power compensation. Being <strong>100% inverter-based</strong>,
+      the SVG has no AC capacitors that could fail.
+    </p>
+
+    <h4>Specifications</h4>
+    <ul>
+      <li><strong>Rating:</strong> 30KVAR / 50KVAR / 100KVAR</li>
+      <li><strong>Voltage:</strong> 400V / 415V / 690V</li>
+      <li><strong>Applicable Standard:</strong> Power Factor Correction</li>
+    </ul>
+  `,
+
+  image: {
+    src: '../static/images/types/type7.avif',
+    alt: 'DV/DT FILTER'
+  }
+}
   };
 
   // --- RENDER DETAILS (single function) ---

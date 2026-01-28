@@ -338,3 +338,11 @@
     justify-self: flex-start;         /* button left aligned under fields */
   }
 }
+#consult-submit .spinner { display: none; }
+#consult-submit.is-loading .spinner { display: inline-block; }
+
+#consult-submit.is-loading .label { opacity: 0.7; }
+
+#consult-submit.is-loading {
+  pointer-events: none;
+}
