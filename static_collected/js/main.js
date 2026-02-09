@@ -1,5 +1,5 @@
 /* ==========================================================
-   landing-page-solar-system.js
+   landing-page-powerqualitysolution.js
    - Scroll reveal (replays on scroll up/down)
    - Optional: adjust initial hash scroll for fixed header
    - Optional: smooth scroll for [data-scroll-to] anchors
@@ -7,8 +7,8 @@
 
 /* ===== CONFIG ===== */
 const SOLAR = {
-  revealSelector: '.reveal-solar-system',
-  inViewClass: 'in-view-solar-system',
+  revealSelector: '.reveal-powerqualitysolution',
+  inViewClass: 'in-view-powerqualitysolution',
   headerSelector: '.header',
   anchorSelector: '[data-scroll-to]'
 };
@@ -80,18 +80,18 @@ function smoothScrollTo(targetSelector) {
    Logos pager (dots) + continuous marquee coexist (robust)
    ========================================================== */
 (function initLogosPager() {
-  const wrap = document.querySelector('.logos-wrap-solar-system');
-  const track = document.getElementById('logos-track-solar-system');
-  const dotsWrap = document.getElementById('dots-solar-system');
+  const wrap = document.querySelector('.logos-wrap-powerqualitysolution');
+  const track = document.getElementById('logos-track-powerqualitysolution');
+  const dotsWrap = document.getElementById('dots-powerqualitysolution');
   if (!wrap || !track || !dotsWrap) return;
 
-  const dots = Array.from(dotsWrap.querySelectorAll('.dot-solar-system'));
+  const dots = Array.from(dotsWrap.querySelectorAll('.dot-powerqualitysolution'));
   const RESUME_DELAY = 3500; // ms after click before continuous scroll resumes
   let resumeTimer = null;
 
   // set active dot helper
   function setActiveDot(idx) {
-    dots.forEach((d, i) => d.classList.toggle('is-active-solar-system', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('is-active-powerqualitysolution', i === idx));
   }
   setActiveDot(0);
 
@@ -100,7 +100,7 @@ function smoothScrollTo(targetSelector) {
 
   // Fully disable CSS animation and let us control transform
   function enterManualMode() {
-    track.classList.add('manual-solar-system');
+    track.classList.add('manual-powerqualitysolution');
     track.style.animationPlayState = 'paused';
   }
 
@@ -108,7 +108,7 @@ function smoothScrollTo(targetSelector) {
   function resumeContinuous() {
     // remove manual transform + class and restart animation cleanly
     track.style.transform = '';
-    track.classList.remove('manual-solar-system');
+    track.classList.remove('manual-powerqualitysolution');
 
     // Restart the CSS animation reliably (toggle to 'none' then back)
     const prevAnim = getComputedStyle(track).animation;
@@ -146,8 +146,8 @@ function smoothScrollTo(targetSelector) {
 
   // Maintain the same page on resize while paused
   const ro = new ResizeObserver(() => {
-    const active = dots.findIndex(el => el.classList.contains('is-active-solar-system'));
-    if (active > -1 && track.classList.contains('manual-solar-system')) {
+    const active = dots.findIndex(el => el.classList.contains('is-active-powerqualitysolution'));
+    if (active > -1 && track.classList.contains('manual-powerqualitysolution')) {
       track.style.transform = `translateX(${-active * pageWidth()}px)`;
     }
   });
@@ -155,35 +155,15 @@ function smoothScrollTo(targetSelector) {
 
   // Also pause marquee on hover (optional, keeps prior UX)
   wrap.addEventListener('mouseenter', () => {
-    if (!track.classList.contains('manual-solar-system')) {
+    if (!track.classList.contains('manual-powerqualitysolution')) {
       track.style.animationPlayState = 'paused';
     }
   });
   wrap.addEventListener('mouseleave', () => {
-    if (!track.classList.contains('manual-solar-system')) {
+    if (!track.classList.contains('manual-powerqualitysolution')) {
       track.style.animationPlayState = 'running';
     }
   });
-})();
-// Simple IntersectionObserver to reveal elements smoothly
-(function(){
-  const els = document.querySelectorAll('.section-generator-services [data-reveal]');
-  if (!('IntersectionObserver' in window) || !els.length) {
-    // fallback: show immediately
-    els.forEach(el => el.classList.add('in-view-generator-services'));
-    return;
-  }
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view-generator-services');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
-
-  els.forEach(el => io.observe(el));
 })();
 
 
@@ -191,7 +171,7 @@ function smoothScrollTo(targetSelector) {
    Count-up animation for Impact stats
    ========================================================== */
 (function initImpactCounters() {
-  const items = document.querySelectorAll('.stat-value-solar-system-impact');
+  const items = document.querySelectorAll('.stat-value-powerqualitysolution-impact');
   if (!items.length) return;
 
   function countTo(el) {
@@ -240,12 +220,12 @@ function smoothScrollTo(targetSelector) {
    Solutions: "View All Solutions" toggle
    ========================================================== */
 (function initSolutionsToggle() {
-  const grid = document.getElementById('solutions-grid-solar-system-solution');
-  const btn = document.getElementById('solutions-toggle-btn-solar-system-solution');
+  const grid = document.getElementById('solutions-grid-powerqualitysolution-solution');
+  const btn = document.getElementById('solutions-toggle-btn-powerqualitysolution-solution');
   if (!grid || !btn) return;
 
   function setState(expanded) {
-    grid.classList.toggle('is-collapsed-solar-system-solution', !expanded);
+    grid.classList.toggle('is-collapsed-powerqualitysolution-solution', !expanded);
     btn.setAttribute('aria-expanded', String(expanded));
     btn.textContent = expanded ? 'View Fewer' : 'View All Solutions';
 
@@ -307,9 +287,9 @@ function smoothScrollTo(targetSelector) {
    Projects carousel: arrows scroll by one full "page"
    ========================================================== */
 (function initProjectsCarousel() {
-  const viewport = document.getElementById('projects-viewport-solar-system-projects');
-  const prevBtn = document.querySelector('.prev-solar-system-projects');
-  const nextBtn = document.querySelector('.next-solar-system-projects');
+  const viewport = document.getElementById('projects-viewport-powerqualitysolution-projects');
+  const prevBtn = document.querySelector('.prev-powerqualitysolution-projects');
+  const nextBtn = document.querySelector('.next-powerqualitysolution-projects');
   if (!viewport || !prevBtn || !nextBtn) return;
 
   function updateButtons() {
@@ -346,11 +326,11 @@ function smoothScrollTo(targetSelector) {
    Types tabs: click/keyboard + hash support
    ========================================================== */
 (function initSolarTypes() {
-  const tabs = Array.from(document.querySelectorAll('.tab-btn-solar-system-types'));
+  const tabs = Array.from(document.querySelectorAll('.tab-btn-powerqualitysolution-types'));
   const panels = {
-    'on-grid': document.getElementById('panel-on-grid-solar-system-types'),
-    'off-grid': document.getElementById('panel-off-grid-solar-system-types'),
-    'hybrid': document.getElementById('panel-hybrid-solar-system-types')
+    'on-grid': document.getElementById('panel-on-grid-powerqualitysolution-types'),
+    'off-grid': document.getElementById('panel-off-grid-powerqualitysolution-types'),
+    'hybrid': document.getElementById('panel-hybrid-powerqualitysolution-types')
   };
   if (!tabs.length) return;
 
@@ -358,7 +338,7 @@ function smoothScrollTo(targetSelector) {
     // tabs
     tabs.forEach(btn => {
       const isActive = btn.dataset.type === type;
-      btn.classList.toggle('is-active-solar-system-types', isActive);
+      btn.classList.toggle('is-active-powerqualitysolution-types', isActive);
       btn.setAttribute('aria-selected', String(isActive));
       // tabindex for roving focus
       btn.setAttribute('tabindex', isActive ? '0' : '-1');
@@ -367,7 +347,7 @@ function smoothScrollTo(targetSelector) {
     Object.entries(panels).forEach(([key, el]) => {
       const show = key === type;
       if (!el) return;
-      el.classList.toggle('is-active-solar-system-types', show);
+      el.classList.toggle('is-active-powerqualitysolution-types', show);
       el.hidden = !show;
       if (show) {
         // restart small fade-in animation
@@ -380,8 +360,8 @@ function smoothScrollTo(targetSelector) {
   tabs.forEach(btn => btn.addEventListener('click', () => activate(btn.dataset.type)));
 
   // Keyboard: left/right arrows
-  document.querySelector('.tabs-solar-system-types')?.addEventListener('keydown', (e) => {
-    const idx = tabs.findIndex(b => b.classList.contains('is-active-solar-system-types'));
+  document.querySelector('.tabs-powerqualitysolution-types')?.addEventListener('keydown', (e) => {
+    const idx = tabs.findIndex(b => b.classList.contains('is-active-powerqualitysolution-types'));
     if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
       e.preventDefault();
       const dir = e.key === 'ArrowRight' ? 1 : -1;
@@ -403,23 +383,23 @@ function smoothScrollTo(targetSelector) {
   fromHash();
 })();
 /* ==========================================================
-   Scoped tabs for all .section-types-solar-system-types
+   Scoped tabs for all .section-types-powerqualitysolution-types
    (no global getElementById; supports multiple instances)
    ========================================================== */
 (function initAllSolarTypeTabs() {
-  document.querySelectorAll('.section-types-solar-system-types').forEach(section => {
-    const tabsWrap = section.querySelector('.tabs-solar-system-types');
+  document.querySelectorAll('.section-types-powerqualitysolution-types').forEach(section => {
+    const tabsWrap = section.querySelector('.tabs-powerqualitysolution-types');
     if (!tabsWrap) return;
 
-    const tabs = Array.from(section.querySelectorAll('.tab-btn-solar-system-types'));
-    const panels = Array.from(section.querySelectorAll('.panel-solar-system-types'));
+    const tabs = Array.from(section.querySelectorAll('.tab-btn-powerqualitysolution-types'));
+    const panels = Array.from(section.querySelectorAll('.panel-powerqualitysolution-types'));
     if (!tabs.length || !panels.length) return;
 
     function activate(btn) {
       // Tabs state
       tabs.forEach(t => {
         const isActive = t === btn;
-        t.classList.toggle('is-active-solar-system-types', isActive);
+        t.classList.toggle('is-active-powerqualitysolution-types', isActive);
         t.setAttribute('aria-selected', String(isActive));
         t.setAttribute('tabindex', isActive ? '0' : '-1');
       });
@@ -429,7 +409,7 @@ function smoothScrollTo(targetSelector) {
       panels.forEach(p => {
         const show = p.id === targetId;
         p.hidden = !show;
-        p.classList.toggle('is-active-solar-system-types', show);
+        p.classList.toggle('is-active-powerqualitysolution-types', show);
         if (show) { p.style.animation = 'none'; p.offsetHeight; p.style.animation = ''; }
       });
     }
@@ -441,7 +421,7 @@ function smoothScrollTo(targetSelector) {
     tabsWrap.addEventListener('keydown', (e) => {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       e.preventDefault();
-      const current = tabs.findIndex(t => t.classList.contains('is-active-solar-system-types'));
+      const current = tabs.findIndex(t => t.classList.contains('is-active-powerqualitysolution-types'));
       const dir = e.key === 'ArrowRight' ? 1 : -1;
       const next = (current + dir + tabs.length) % tabs.length;
       tabs[next].focus();
@@ -449,7 +429,7 @@ function smoothScrollTo(targetSelector) {
     });
 
     // Init: use the one marked active or the first
-    activate(tabs.find(t => t.classList.contains('is-active-solar-system-types')) || tabs[0]);
+    activate(tabs.find(t => t.classList.contains('is-active-powerqualitysolution-types')) || tabs[0]);
   });
 })();
 
@@ -563,11 +543,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Intersection Observer for gentle reveals */
 (function () {
-  const items = document.querySelectorAll('.reveal-lv-electrical-panel-');
+  const items = document.querySelectorAll('.reveal-powerqualitysolution-panel-');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('reveal-in-lv-electrical-panel-');
+        e.target.classList.add('reveal-in-powerqualitysolution-panel-');
         io.unobserve(e.target);
       }
     });
@@ -576,7 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
   items.forEach(el => io.observe(el));
 
   /* Simple form handler (prevent empty submit in demo) */
-  const form = document.getElementById('service-form-lv-electrical-panel-');
+  const form = document.getElementById('service-form-powerqualitysolution-panel-');
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     const fd = new FormData(form);
@@ -696,11 +676,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Simple reveal on scroll */
 (() => {
-  const els = document.querySelectorAll('.reveal-lv-electrical-panel-');
+  const els = document.querySelectorAll('.reveal-powerqualitysolution-panel-');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('reveal-in-lv-electrical-panel-');
+        e.target.classList.add('reveal-in-powerqualitysolution-panel-');
         io.unobserve(e.target);
       }
     });
@@ -711,11 +691,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Reveal on scroll for the About section
 (() => {
-  const items = document.querySelectorAll('.reveal-lv-electrical-about-');
+  const items = document.querySelectorAll('.reveal-powerqualitysolution-about-');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('reveal-in-lv-electrical-about-');
+        e.target.classList.add('reveal-in-powerqualitysolution-about-');
         io.unobserve(e.target);
       }
     });
@@ -725,12 +705,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 (() => {
   const els = document.querySelectorAll(
-    '.reveal-left-lv-electrical-services, .reveal-right-lv-electrical-services, .reveal-up-lv-electrical-services'
+    '.reveal-left-powerqualitysolution-services, .reveal-right-powerqualitysolution-services, .reveal-up-powerqualitysolution-services'
   );
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('reveal-in-lv-electrical-services');
+        e.target.classList.add('reveal-in-powerqualitysolution-services');
         io.unobserve(e.target);
       }
     });
@@ -740,12 +720,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 (() => {
   const els = document.querySelectorAll(
-    '.reveal-left-lv-electrical-services, .reveal-right-lv-electrical-services, .reveal-up-lv-electrical-services'
+    '.reveal-left-powerqualitysolution-services, .reveal-right-powerqualitysolution-services, .reveal-up-powerqualitysolution-services'
   );
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('reveal-in-lv-electrical-services');
+        e.target.classList.add('reveal-in-powerqualitysolution-services');
         io.unobserve(e.target);
       }
     });
@@ -754,12 +734,12 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 (() => {
   const els = document.querySelectorAll(
-    '.reveal-left-lv-electrical-services, .reveal-right-lv-electrical-services, .reveal-up-lv-electrical-services'
+    '.reveal-left-powerqualitysolution-services, .reveal-right-powerqualitysolution-services, .reveal-up-powerqualitysolution-services'
   );
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('reveal-in-lv-electrical-services');
+        e.target.classList.add('reveal-in-powerqualitysolution-services');
         io.unobserve(e.target);
       }
     });
@@ -769,12 +749,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // Simple reveal on scroll for the process section
 (() => {
   const els = document.querySelectorAll(
-    '.reveal-left-lv-electrical-process, .reveal-right-lv-electrical-process'
+    '.reveal-left-powerqualitysolution-process, .reveal-right-powerqualitysolution-process'
   );
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.add('reveal-in-lv-electrical-process');
+        e.target.classList.add('reveal-in-powerqualitysolution-process');
         io.unobserve(e.target);
       }
     });
@@ -785,12 +765,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // Reveal-on-scroll for the Why Choose Us section
 (() => {
   const targets = document.querySelectorAll(
-    '.reveal-left-le-electrical-why-us, .reveal-right-le-electrical-why-us, .reveal-top-le-electrical-why-us, .reveal-bottom-le-electrical-why-us'
+    '.reveal-left-powerqualitysolution-why-us, .reveal-right-powerqualitysolution-why-us, .reveal-top-powerqualitysolution-why-us, .reveal-bottom-powerqualitysolution-why-us'
   );
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-in-le-electrical-why-us');
+        entry.target.classList.add('reveal-in-powerqualitysolution-why-us');
         io.unobserve(entry.target);
       }
     });
@@ -807,309 +787,172 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!grid || !detail) return;
 
   // --- DETAILS CONTENT MAP ---
-  const detailsMap = {
- rtpfc: {
-  title: 'Real-Time Power Factor Correction Panel (RTPFC)',
+  const detailsMap = {powertransformers: {
+  title: 'Power Transformers',
   body: `
     <p>
-      <strong>RTPFC panels</strong> integrate a CRCA powder-coated MS enclosure, self-healing MPP capacitors,
-      duty/thyristor-switched contactors, APFCR controller, forced ventilation (fan), full switchgear,
-      AL/CU busbars, and IP protection. The thyristor-switched contactor is sized to handle
-      <strong>130% of the rated capacitor current at 415&nbsp;V</strong> for reliable dynamic compensation.
+      A <strong>power transformer</strong> is a static electrical device that transfers electrical energy between two or more circuits through electromagnetic induction.
+      It is primarily used to step up or step down voltage levels in AC (alternating current) circuits, enabling efficient power transmission over long distances.
     </p>
 
-    <h4>Key Advantages</h4>
+    <h4>Applications of Power Transformers</h4>
     <ul>
-      <li><strong>Real-time PF correction:</strong> fast, step-less response for fluctuating loads.</li>
-      <li><strong>Self-healing MPP capacitors:</strong> long life and safer operation.</li>
-      <li><strong>APFCR intelligence:</strong> automatic stage control, alarms, and protection logic.</li>
-      <li><strong>Robust construction:</strong> CRCA enclosure, AL/CU busbars, IP-rated assembly.</li>
-      <li><strong>Thyristor switching:</strong> inrush-free, wear-free operation and smooth transitions.</li>
+      <li><strong>Electrical Power Distribution:</strong> Used in power stations to step up voltage for long-distance transmission and step down at substation for local distribution.</li>
+      <li><strong>Industrial Plants:</strong> Regulate voltage supply within factories, ensuring machines and equipment receive the correct voltage levels.</li>
+      <li><strong>Commercial Buildings:</strong> Integrated into building distribution systems to supply consistent power to large facilities.</li>
+      <li><strong>Renewable Energy Systems:</strong> Connect renewable sources like wind and solar plants to the grid by adjusting voltage to match system requirements.</li>
+      <li><strong>Electric Utilities:</strong> Essential for voltage conversion within electric grids to maintain stability and reliability.</li>
     </ul>
 
-    <h4>Specifications</h4>
+    <h4>Where Power Transformers Are Used</h4>
     <ul>
-      <li><strong>Rating:</strong> 50…4000&nbsp;kVAr</li>
-      <li><strong>Voltage:</strong> 400 / 440 / 480 / 525 / 690 / 800&nbsp;V</li>
-      <li><strong>Mode of Switching:</strong> Static (thyristor)</li>
+      <li><strong>Power Generation Plants:</strong> Adjust voltage between generators and transmission networks for optimal transfer efficiency.</li>
+      <li><strong>Substations:</strong> Convert high voltage from transmission lines into lower voltage suitable for end users.</li>
+      <li><strong>Industrial Facilities:</strong> Common in steel plants, chemical factories, and mining operations that demand high electrical power.</li>
+      <li><strong>Residential Areas:</strong> Part of the distribution network that delivers electricity safely to homes and smaller commercial areas.</li>
     </ul>
+  `,
+  image: { src: '../static/images/type1.avif', alt: 'High-voltage power transformer installation' }
+},
+    distributiontransformers: {
+  title: 'Distribution Transformers',
+  body: `
+    <p>
+      A <strong>distribution transformer</strong> is used in the final stage of the electric power distribution system.
+      It steps down the high voltage received from the transmission network to a lower voltage suitable for consumer use
+      in homes, commercial buildings, and industries. Typically, these transformers are either pole-mounted or ground-mounted,
+      positioned close to the point of consumption.
+    </p>
+
+    <h4>Where We Use Distribution Transformers</h4>
+    <ul>
+      <li><strong>Residential Areas:</strong> Step down high-voltage electricity to safe and usable levels for households.</li>
+      <li><strong>Commercial and Industrial Areas:</strong> Supply power to offices, businesses, and factories at suitable voltage levels for their equipment.</li>
+      <li><strong>Rural Areas:</strong> Provide localized power distribution for small towns and remote communities.</li>
+    </ul>
+  `,
+  image: { src: '../static/images/type2.avif', alt: 'Pole-mounted distribution transformer' }
+},
+    unitsubstation:  {
+  title: 'Unit Substation Transformers',
+  body: `
+    <p>
+      A <strong>Unit Substation Transformer</strong> is a compact, self-contained system that combines a transformer with
+      essential components such as circuit breakers, switches, and protective devices. It is designed for efficient,
+      localized distribution of electricity — typically at medium to low voltage levels.
+    </p>
+    <p>
+      These substation are ideal for industrial, commercial, and large residential applications where space is limited.
+      They provide a space-saving and cost-effective solution for transforming and distributing electrical power safely
+      and reliably.
+    </p>
+
+    <h4>Applications and Uses</h4>
+    <ul>
+      <li><strong>Industrial Settings:</strong> Step down high-voltage power for machinery and plant equipment in factories.</li>
+      <li><strong>Commercial Buildings:</strong> Supply reliable power to office complexes, malls, and shopping centers.</li>
+      <li><strong>Urban Areas:</strong> Perfect for cities and densely populated areas requiring compact distribution solutions.</li>
+      <li><strong>Renewable Energy Integration:</strong> Used in solar and wind systems to transform voltage for grid connection or localized distribution.</li>
+    </ul>
+  `,
+  image: { src: '../static/images/type3.avif', alt: 'Compact unit substation transformer system' }
+},
+    compact: {
+  title: 'Compact Substations',
+  body: `
+    <p>
+      A <strong>Compact Substation</strong> is a small, integrated electrical facility designed to transform electrical voltage
+      from high to low levels and distribute power efficiently. It combines key components such as transformers, switchgear,
+      protection devices, and control systems into a single, space-efficient unit.
+    </p>
+    <p>
+      Compact substation are typically installed in areas where land is limited or where a streamlined power distribution
+      solution is needed, providing safety, reliability, and reduced installation time.
+    </p>
 
     <h4>Applications</h4>
     <ul>
-      <li><strong>Power Factor (PF) improvement</strong> for dynamic / rapidly varying loads.</li>
-      <li><strong>Harmonic reduction</strong> support when combined with appropriate filtering strategy.</li>
-      <li>Industrial plants, commercial facilities, utilities, and critical process lines.</li>
+      <li><strong>Urban Areas:</strong> Ideal for cities where space is constrained and a reliable power supply is essential.</li>
+      <li><strong>Industrial Plants:</strong> Step down transmission voltages to levels suitable for industrial machinery and systems.</li>
+      <li><strong>Renewable Energy Integration:</strong> Enable solar and wind power systems to be efficiently connected to the grid.</li>
+      <li><strong>Railways:</strong> Supply power to train lines, signaling systems, and associated railway infrastructure.</li>
+    </ul>
+
+    <h4>Where to Use</h4>
+    <ul>
+      <li><strong>Residential Areas:</strong> Power distribution for dense housing or apartment developments.</li>
+      <li><strong>Commercial Complexes:</strong> Serve shopping malls, offices, and other commercial properties efficiently.</li>
+      <li><strong>Construction Sites:</strong> Temporary yet reliable power distribution during large-scale project execution.</li>
+      <li><strong>Remote Locations:</strong> Ideal for sites with limited infrastructure where traditional substation are impractical.</li>
     </ul>
   `,
-  image: { src: '../static/images/types/type1.avif', alt: 'RTPFC panel with APFCR and thyristor switching' }
+  image: { src: '../static/images/type4.avif', alt: 'Compact substation unit for efficient power distribution' }
 },
-htfilter:{
- 
-  title: 'HT HARMONICS FILTER BANK',
+drytype: {
+  title: 'Dry Type Transformers',
   body: `
     <p>
-      The solution includes a <strong>High Tension (HT) capacitor</strong> and <strong>HT reactor</strong>,
-      assembled in either a <strong>single star</strong> or <strong>double star</strong> configuration,
-      integrated with <strong>Neutral Current Transformer (NCT)</strong> or
-      <strong>Residual Voltage Transformer (RVT)</strong> components.
-      This setup is specifically designed as a <strong>Detuned Filter</strong>, available in
-      <strong>5.6%</strong>, <strong>7%</strong>, and <strong>14%</strong> configurations to optimize performance.
-      Its primary application is focused on improving <strong>power factor (PF)</strong> for dynamic loads and
-      effectively reducing <strong>harmonics</strong>, ensuring a stable and efficient power distribution system.
+      A <strong>Dry Type Transformer</strong> uses air as the cooling medium instead of oil, making it a safer and more
+      environmentally friendly option. These transformers are ideal for locations where safety and cleanliness are
+      critical, as they eliminate the risk of oil leaks and associated fire hazards.
     </p>
 
-    <h4>Configuration</h4>
+    <h4>Applications</h4>
     <ul>
-      <li><strong>Assembly:</strong> HT capacitor + HT reactor in single star / double star</li>
-      <li><strong>Integration:</strong> NCT / RVT</li>
-      <li><strong>Type:</strong> Detuned Filter (5.6%, 7%, 14%)</li>
+      <li><strong>Indoor Installations:</strong> Perfect for buildings, factories, and high-risk facilities due to their non-flammable design.</li>
+      <li><strong>Urban Areas:</strong> Suitable for city environments where space is limited and environmental regulations are strict.</li>
+      <li><strong>Renewable Energy:</strong> Commonly used in solar and wind systems for voltage conversion and energy integration.</li>
+      <li><strong>Mining and Offshore:</strong> Ideal for hazardous areas such as mines or offshore platforms where fire and explosion risks exist.</li>
     </ul>
 
-    <h4>Application</h4>
+    <h4>Where We Use Them</h4>
     <ul>
-      <li><strong>PF improvement</strong> for dynamic loads</li>
-      <li><strong>Harmonic reduction</strong></li>
+      <li><strong>Commercial Buildings:</strong> Offices, shopping malls, and public facilities requiring safe indoor power distribution.</li>
+      <li><strong>Industrial Applications:</strong> Manufacturing plants, production lines, and automated systems.</li>
+      <li><strong>Renewable Energy Projects:</strong> Solar farms, wind farms, and hybrid power generation systems.</li>
+      <li><strong>Public Utilities:</strong> Substations and power distribution networks for urban and rural areas.</li>
     </ul>
   `,
-  image: { src: '../static/images/types/type2.avif', alt: 'HT HARMONICS FILTER BANK' }
-
-
-},
-
-ahf:{
-
-   title: 'ACTIVE HARMONICS FILTER PANEL',
-  body: `
-    <p>
-      The smallest active model in this range is designed for <strong>precise and reliable harmonic compensation</strong>,
-      effectively addressing up to the <strong>50th harmonic order</strong> while also optimizing
-      <strong>reactive power management</strong>. This targeted solution improves power quality and system stability,
-      making it suitable for a wide range of industrial applications.
-    </p>
-
-    <h4>Key Highlights</h4>
-    <ul>
-      <li><strong>Harmonic compensation:</strong> up to the 50th harmonic order</li>
-      <li><strong>Reactive power support:</strong> targeted compensation for improved PF</li>
-      <li><strong>Improves power quality:</strong> better stability and cleaner supply</li>
-    </ul>
-
-    <h4>Specifications</h4>
-    <ul>
-      <li><strong>Rating:</strong> 30 / 50 / 60 / 100 / 120 / 200 / 250 / 300 A</li>
-      <li><strong>Voltage:</strong> 380…480 V, 690 V</li>
-    </ul>
-  `,
-  image: {
-    src: '../static/images/types/type3.avif',
-    alt: 'ACTIVE HARMONICS FILTER PANEL'
-  }
-},
-    phf:{
-       title: 'PASSIVE HARMONICS FILTER',
-  body: `
-    <p>
-      The <strong>Passive Harmonics Filter</strong> is an integrated solution housed in a
-      <strong>CRCA powder-coated MS sheet enclosure</strong>, fully wired with
-      <strong>self-healing MPP capacitors</strong> and <strong>reactors</strong>.
-      The panel includes <strong>capacitor duty contactors</strong>, <strong>fan</strong>,
-      <strong>APFCR controller</strong>, complete <strong>switchgear</strong>,
-      <strong>AL/CU busbars</strong>, and appropriate <strong>IP protection</strong>,
-      ensuring reliable and long-term operation.
-    </p>
-
-    <h4>Specifications</h4>
-    <ul>
-      <li><strong>Rating:</strong> 50 to 4000 kVAr</li>
-      <li><strong>Voltage:</strong> 400 / 440 / 480 / 525 / 690 / 800 / 1200 V</li>
-      <li><strong>Mode of Switching:</strong> Contactor / Static</li>
-    </ul>
-
-    <h4>Filter Types</h4>
-    <ul>
-      <li><strong>Detuned Filter:</strong> 5.6%, 7%, 14%</li>
-      <li><strong>Tuned Filter:</strong> 3rd, 5th, 11th &amp; 13th</li>
-    </ul>
-
-    <h4>Application</h4>
-    <ul>
-      <li><strong>Harmonic reduction</strong></li>
-      <li>Improved power quality and system reliability</li>
-    </ul>
-  `,
-  image: {
-    src: '../static/images/types/type4.avif',
-    alt: 'PASSIVE HARMONICS FILTER'
-  }
- },
-hybrid: {
-  title: 'HYBRID HARMONICS FILTER',
-  body: `
-    <p>
-      The <strong>Hybrid Harmonics Filter</strong> is a combination of an
-      <strong>active filter</strong> and a <strong>passive filter</strong>.
-      It uses an <strong>IGBT-based power converter</strong> to effectively reduce
-      harmonic distortion while simultaneously supporting
-      <strong>power factor (PF) improvement</strong>.
-    </p>
-
-    <p>
-      This system is designed with a configuration of
-      <strong>200 Amperes</strong> and <strong>1000 kVAr</strong>, making it highly effective
-      for applications requiring both harmonic mitigation and reactive power compensation.
-      The <strong>static mode of switching</strong> ensures fast and efficient response,
-      delivering reliable compensation to optimize power quality and overall system performance.
-    </p>
-
-    <h4>Specifications</h4>
-    <ul>
-      <li><strong>Rating:</strong> 200 A + 1000 kVAr</li>
-      <li><strong>Voltage:</strong> 400 / 440 / 480 to 690 V</li>
-      <li><strong>Mode of Switching:</strong> Static</li>
-    </ul>
-
-    <h4>Application</h4>
-    <ul>
-      <li><strong>Power Factor (PF) improvement</strong></li>
-      <li><strong>Harmonic reduction</strong></li>
-      <li>Enhanced power quality and system stability</li>
-    </ul>
-  `,
-  image: {
-    src: '../static/images/types/type5.avif',
-    alt: 'HYBRID HARMONICS FILTER'
-  }
-
-  },
-
-sine: {
-  title: 'SINE WAVE FILTER',
-  body: `
-    <p>
-      The <strong>Sine Wave Filter</strong> converts the rectangular PWM output voltage of motor drives
-      into a <strong>smooth sine wave</strong> with very low residual ripple. This significantly reduces
-      electrical stress on motors and connected equipment.
-    </p>
-
-    <p>
-      By eliminating high <strong>dv/dt</strong>, overvoltages, cable ringing, motor overheating,
-      and eddy current losses, the sine wave filter helps prevent premature motor damage.
-      It also <strong>improves motor bearing lifetime</strong> by reducing harmful bearing currents,
-      making it ideal for long cable applications and high-speed drives.
-    </p>
-
-    <h4>Specifications</h4>
-    <ul>
-      <li><strong>Motor Power:</strong> 7.5 to 1200 kW</li>
-      <li><strong>Motor Frequency:</strong> Up to 600 Hz</li>
-      <li><strong>Motor Cable Length:</strong> Up to 2000 m</li>
-      <li><strong>Rated Current:</strong> 13 to 1320 A</li>
-      <li><strong>Switching Frequency:</strong> 2 to 16 kHz</li>
-      <li><strong>Voltage:</strong> 0 to 690 VAC</li>
-    </ul>
-
-    <h4>Application</h4>
-    <ul>
-      <li>Conversion of PWM output to a <strong>smooth sine wave</strong></li>
-      <li>Protection of motors from <strong>dv/dt stress and overvoltage</strong></li>
-      <li>Extended motor and bearing life</li>
-      <li>Suitable for long motor cable installations</li>
-    </ul>
-  `,
-  image: {
-    src: '../static/images/types/type6.avif',
-    alt: 'SINE WAVE FILTER'
-  }
-},
-
-dvdtFilter: {
-  title: 'DV/DT FILTER',
-  body: `
-    <p>
-      The <strong>DV/DT Filter</strong> is designed to protect motors and insulation systems from the
-      harmful effects of steep voltage rise times generated by modern PWM motor drives.
-      These filters are capable of handling drive switching frequencies of up to
-      <strong>40 kHz</strong>. With lower switching frequencies, the filter generates less heat,
-      allowing for efficient and reliable operation.
-    </p>
-
-    <p>
-      This system is engineered to operate at a <strong>maximum frequency of 4 kHz</strong> and
-      supports a wide <strong>voltage range from 0 to 690 VAC</strong>.
-      It effectively reduces <strong>insulation stress</strong>, minimizes voltage spikes,
-      and helps prevent premature failure of motor windings and cables.
-    </p>
-
-    <h4>Specifications</h4>
-    <ul>
-      <li><strong>Maximum Frequency:</strong> 4 kHz</li>
-      <li><strong>Voltage:</strong> 0 to 690 VAC</li>
-    </ul>
-
-    <h4>Application</h4>
-    <ul>
-      <li>Reduction of <strong>insulation stress</strong> in motor and cable systems</li>
-      <li>Protection against high <strong>dv/dt</strong> and voltage peaks</li>
-      <li>Improved equipment reliability and service life</li>
-    </ul>
-  `,
-  image: {
-    src: '../static/images/types/type7.avif',
-    alt: 'DV/DT FILTER'
-  }
-
-  
-},
-
-
-svg: {
-  title: 'Static Var Generator (SVG)',
-  body: `
-
-    <p><strong>Frequency:</strong> 50/60Hz</p>
-
-    <p>
-      <strong>A Revolutionary New Power Factor System – Static Var Generator (SVG)</strong><br/>
-      Automatic power factor correction equipment is widely used in industry to ensure optimal utilization of the
-      electrical network. Typically, such power factor correction involves an automatic controller that monitors the
-      incoming phase to a plant and switches banks of capacitors to maintain a target power factor.
-    </p>
-
-    <p>
-      However, traditional capacitor-based automatic power factor correction systems have significant limitations.
-      They are slow to react to load changes, causing the system to constantly shift between overcompensation and under
-      compensation. In environments rich with harmonics, capacitors can become overloaded, increasing the risk of system
-      resonance, shortening system life expectancy, and causing contactor failures. Overloaded capacitors may also leak,
-      presenting a serious fire hazard.
-    </p>
-
-    <p>
-      The <strong>Static Var Generator (SVG)</strong> offers a completely new approach to power factor correction.
-      Using a high-speed, three-level inverter, the SVG responds quickly to changes in reactive power, delivering
-      corrective reactive power into the system. Full correction is achieved within <strong>3/4 of a cycle</strong>,
-      providing real-time, stable, and accurate power factor correction.
-    </p>
-
-    <p>
-      Unlike traditional systems, the SVG can dynamically and bi-directionally adjust reactive power
-      (both <strong>leading</strong> and <strong>lagging</strong>). There is no risk of system resonance, and even under
-      low voltage conditions, the SVG ensures full reactive power compensation. Being <strong>100% inverter-based</strong>,
-      the SVG has no AC capacitors that could fail.
-    </p>
-
-    <h4>Specifications</h4>
-    <ul>
-      <li><strong>Rating:</strong> 30KVAR / 50KVAR / 100KVAR</li>
-      <li><strong>Voltage:</strong> 400V / 415V / 690V</li>
-      <li><strong>Applicable Standard:</strong> Power Factor Correction</li>
-    </ul>
-  `,
-
-  image: {
-    src: '../static/images/types/type7.avif',
-    alt: 'DV/DT FILTER'
-  }
+   image: {
+  src: "../static/images/type5.avif",
+  alt: "Dry type transformer for indoor and renewable energy use"
 }
+  },
+special: {
+  title: 'Special Transformers',
+  body: `
+    <p>
+      <strong>Special Transformers</strong> are designed to meet specific, non-standard requirements across a range of
+      specialized applications. Unlike conventional transformers used for general voltage conversion, these are customized
+      for unique operational needs such as high efficiency, compact design, or specific environmental and performance conditions.
+    </p>
+
+    <h4>Types of Special Transformers and Their Applications</h4>
+    <ul>
+      <li><strong>Auto-Transformers:</strong> Used in high-voltage transmission and distribution networks to adjust voltages efficiently. Common in motor starting applications requiring high efficiency.</li>
+      <li><strong>Isolation Transformers:</strong> Provide electrical isolation between circuits to prevent noise and protect sensitive equipment—used in medical, laboratory, and audio equipment.</li>
+      <li><strong>Arc Furnace Transformers:</strong> Specially built for electric arc furnaces in steel manufacturing, capable of handling high power and extreme operating conditions.</li>
+      <li><strong>Frequency Converters:</strong> Convert electrical supply frequency (e.g., 50 Hz to 60 Hz) for industrial equipment operating across different regional power standards.</li>
+      <li><strong>Rectifier Transformers:</strong> Supply DC voltage to rectifier circuits for DC motors, electroplating, and battery charging systems.</li>
+      <li><strong>Oil-Cooled Transformers:</strong> Heavy-duty units used in power plants and substation; the oil provides both cooling and insulation for continuous, high-load operation.</li>
+      <li><strong>Gas Insulated Transformers (GIT):</strong> Ideal for confined or harsh environments where air-insulated designs are impractical—used in underground or space-limited installations.</li>
+      <li><strong>Current Transformers (CT):</strong> Convert high system currents into lower, measurable values for monitoring and protective relaying applications.</li>
+    </ul>
+
+    <h4>Use Cases</h4>
+    <ul>
+      <li><strong>Industrial Applications:</strong> Found in power plants, factories, and steel mills supporting heavy machinery and specialized processes.</li>
+      <li><strong>Healthcare:</strong> Used in medical devices and equipment requiring electrical isolation for patient safety.</li>
+      <li><strong>Power Distribution:</strong> Applied in systems with specific voltage and frequency requirements or where circuit isolation is necessary.</li>
+      <li><strong>Renewable Energy:</strong> Integrated into solar farms, wind plants, and hybrid systems for voltage or frequency adaptation.</li>
+    </ul>
+  `,
+  image: { src: '../static/images/type6.avif', alt: 'Special type transformers for industrial and renewable energy applications' }
+},
+
+
+
+
   };
 
   // --- RENDER DETAILS (single function) ---
@@ -1141,7 +984,7 @@ svg: {
 
   // --- CLICK HANDLER (delegated) ---
   grid.addEventListener('click', (e) => {
-    const btn = e.target.closest('.svc-cta-lv-electrical-services');
+    const btn = e.target.closest('.svc-cta-powerqualitysolution-services');
     if (!btn) return;
     const key = btn.getAttribute('data-detail');
     const currentTitle = detail.querySelector('h3')?.textContent || '';
@@ -1154,7 +997,7 @@ svg: {
 
   // --- EXPLORE / VIEW LESS toggle (uses .is-hidden on extra cards) ---
   if (exploreBtn) {
-    const allCards = Array.from(grid.querySelectorAll('.svc-item-lv-electrical-services'));
+    const allCards = Array.from(grid.querySelectorAll('.svc-item-powerqualitysolution-services'));
     const extraCards = allCards.slice(3); // cards 4..7
     let expanded = false;
 
@@ -1174,7 +1017,7 @@ svg: {
       }
       // retrigger reveal animations if you use them
       extraCards.forEach(el => {
-        el.classList.remove('reveal-in-lv-electrical-services');
+        el.classList.remove('reveal-in-powerqualitysolution-services');
         void el.offsetWidth;
       });
     }
@@ -1190,14 +1033,14 @@ svg: {
 
   // --- SCROLL REVEAL (bi-directional) ---
   const revealEls = document.querySelectorAll(
-    '.reveal-left-lv-electrical-services, .reveal-right-lv-electrical-services, .reveal-up-lv-electrical-services'
+    '.reveal-left-powerqualitysolution-services, .reveal-right-powerqualitysolution-services, .reveal-up-powerqualitysolution-services'
   );
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-in-lv-electrical-services');
+        entry.target.classList.add('reveal-in-powerqualitysolution-services');
       } else {
-        entry.target.classList.remove('reveal-in-lv-electrical-services');
+        entry.target.classList.remove('reveal-in-powerqualitysolution-services');
       }
     });
   }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
@@ -1206,7 +1049,7 @@ svg: {
 (() => {
   const modal = document.getElementById('csc-modal');
   const form  = document.getElementById('csc-form');
-  const close = modal.querySelector('.modal-close-csc-solar-system-csc-products');
+  const close = modal.querySelector('.modal-close-csc-powerqualitysolution-csc-products');
   const successPane  = document.getElementById('csc-success');
   const docNameInput = document.getElementById('csc-doc-name');
 
@@ -1224,7 +1067,7 @@ svg: {
   }
 
   // Open from each "Request Download" button
-  document.querySelectorAll('.request-download-csc-solar-system-csc-products').forEach(btn => {
+  document.querySelectorAll('.request-download-csc-powerqualitysolution-csc-products').forEach(btn => {
     btn.addEventListener('click', () => {
       docNameInput.value = btn.dataset.doc || '';
       openModal();
@@ -1233,7 +1076,183 @@ svg: {
 
   // Close handlers
   close.addEventListener('click', closeModal);
-  modal.querySelector('.modal-backdrop-csc-solar-system-csc-products')
+  modal.querySelector('.modal-backdrop-csc-powerqualitysolution-csc-products')
        .addEventListener('click', closeModal);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
+(function(){
+  // Reveal on scroll
+  const els = document.querySelectorAll('.reveal-powerqualitysolution-all-features');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: .2});
+  els.forEach(el=>io.observe(el));
+
+  // Make keyboard Enter activate cards nicely
+  document.querySelectorAll('.card-powerqualitysolution-all-features').forEach(a=>{
+    a.addEventListener('keydown',(ev)=>{
+      if(ev.key === 'Enter' || ev.key === ' '){
+        ev.preventDefault();
+        a.click();
+      }
+    });
+  });
+})();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const faqCards = document.querySelectorAll(".faq-card");
+
+  faqCards.forEach(card => {
+    const question = card.querySelector("h4");
+    question.addEventListener("click", () => {
+      // Collapse all other open cards
+      faqCards.forEach(c => {
+        if (c !== card) c.classList.remove("active");
+      });
+      // Toggle the clicked one
+      card.classList.toggle("active");
+    });
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.querySelector(".testimonial-track");
+  const slides = document.querySelectorAll(".testimonial-card");
+  const prev = document.querySelector(".arrow.left");
+  const next = document.querySelector(".arrow.right");
+
+  let index = 0;
+  const total = slides.length;
+
+  function showSlide(i) {
+    index = (i + total) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function nextSlide() { showSlide(index + 1); }
+  function prevSlide() { showSlide(index - 1); }
+
+  next.addEventListener("click", nextSlide);
+  prev.addEventListener("click", prevSlide);
+
+  // Auto slide every 5 seconds
+  let autoSlide = setInterval(nextSlide, 5000);
+
+  // Pause auto on hover
+  document.querySelector(".testimonial-slider").addEventListener("mouseenter", () => clearInterval(autoSlide));
+  document.querySelector(".testimonial-slider").addEventListener("mouseleave", () => autoSlide = setInterval(nextSlide, 5000));
+});
+
+
+(function(){
+  const viewport = document.querySelector('.t-viewport');
+  const track    = document.querySelector('.t-track');
+  const prevBtn  = document.querySelector('.t-arrow.prev');
+  const nextBtn  = document.querySelector('.t-arrow.next');
+
+  let slides   = Array.from(track.children);
+  let index    = 0;
+  let isAnimating = false;
+  const gapPx  = 24;
+  const intervalMs = 4000;
+
+  // Determine how many cards are visible (1 on mobile, 2 on desktop)
+  function visibleCount(){
+    return window.matchMedia('(max-width: 900px)').matches ? 1 : 2;
+  }
+
+  // Prepare infinite: clone first (visibleCount + 2) slides to the end
+  function primeClones(){
+    // remove old clones first
+    Array.from(track.querySelectorAll('.t-clone')).forEach(n => n.remove());
+    const vc = visibleCount();
+    const cloneN = Math.min(slides.length, vc + 2);
+    for(let i=0;i<cloneN;i++){
+      const c = slides[i].cloneNode(true);
+      c.classList.add('t-clone');
+      track.appendChild(c);
+    }
+    slides = Array.from(track.children);
+  }
+
+  function cardWidth(){
+    // card width + gap
+    const vc = visibleCount();
+    const vpW = viewport.clientWidth;
+    if(vc === 1) return vpW; // 100%
+    // (100% - gap)/2
+    return (vpW - gapPx) / 2;
+  }
+
+  function goTo(newIndex, withTransition = true){
+    if(isAnimating) return;
+    isAnimating = true;
+
+    const shift = -newIndex * (cardWidth() + gapPx);
+    track.style.transition = withTransition ? 'transform .45s ease' : 'none';
+    track.style.transform  = `translateX(${shift}px)`;
+
+    track.addEventListener('transitionend', onDone, { once: true });
+    if(!withTransition) isAnimating = false;
+
+    function onDone(){
+      // If we moved beyond the last real slide, snap back
+      const vc = visibleCount();
+      const maxRealIndex = document.querySelectorAll('.t-track > :not(.t-clone)').length - vc;
+      if(newIndex > maxRealIndex){
+        index = 0;
+        const snap = -index * (cardWidth() + gapPx);
+        track.style.transition = 'none';
+        track.style.transform  = `translateX(${snap}px)`;
+      } else {
+        index = newIndex;
+      }
+      isAnimating = false;
+    }
+  }
+
+  function next(){ goTo(index + 1); }
+  function prev(){
+    if(isAnimating) return;
+    const vc = visibleCount();
+    const realCount = document.querySelectorAll('.t-track > :not(.t-clone)').length;
+    if(index === 0){
+      // jump to the last visible start, then animate back one
+      const maxStart = Math.max(0, realCount - vc);
+      const jump = -maxStart * (cardWidth() + gapPx);
+      track.style.transition = 'none';
+      track.style.transform  = `translateX(${jump}px)`;
+      index = maxStart;
+      requestAnimationFrame(()=> requestAnimationFrame(()=> goTo(index - 1)));
+    }else{
+      goTo(index - 1);
+    }
+  }
+
+  // Auto-play (pause on hover/focus)
+  let timer = null;
+  function start(){ stop(); timer = setInterval(next, intervalMs); }
+  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+
+  viewport.addEventListener('mouseenter', stop);
+  viewport.addEventListener('mouseleave', start);
+  viewport.addEventListener('focusin', stop);
+  viewport.addEventListener('focusout', start);
+
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  window.addEventListener('resize', ()=>{
+    // Re-prime on layout change
+    primeClones();
+    goTo(index, false);
+  });
+
+  // Init
+  primeClones();
+  goTo(0, false);
+  start();
 })();

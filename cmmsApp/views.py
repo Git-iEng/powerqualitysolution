@@ -22,45 +22,19 @@ import pycountry
 
 from .forms import ContactForm
 from .utils_contact import normalize_phone_and_country, country_name_from_alpha2
-
-
 # ---------- Validation patterns ----------
 NAME_RE  = re.compile(r"^[A-Za-z\s'.-]{2,}$")
 PHONE_RE = re.compile(r"^\+?\d[\d\s\-()]{6,}$")
-
-# ---------- Excel paths ----------
-# EXCEL_DIR  = os.path.join(settings.BASE_DIR, "data")
-# EXCEL_PATH = os.path.join(EXCEL_DIR, "carl_demo_requests.xlsx")
-
-
 
 def _static_abs_path(relpath: str) -> str | None:
     """Return absolute path of a static file using Django's staticfiles finders, or None."""
     return finders.find(relpath)
 
 
-# def _append_to_excel(row):
-#     """Create/append to the Request Demo workbook."""
-#     os.makedirs(EXCEL_DIR, exist_ok=True)
-#     if os.path.exists(EXCEL_PATH):
-#         wb = load_workbook(EXCEL_PATH)
-#         ws = wb.active
-#     else:
-#         wb = Workbook()
-#         ws = wb.active
-#         ws.title = "Requests"
-#         headers = [
-#             "Timestamp", "Full Name", "Company", "Email",
-#             "Country", "Dial Code", "Phone", "Address",
-#             "Message", "Source IP",
-#         ]
-#         ws.append(headers)
-#         for i in range(1, len(headers) + 1):
-#             ws.column_dimensions[get_column_letter(i)].width = 24
-#     ws.append(row)
-#     wb.save(EXCEL_PATH)
 
 
+
+# ---------- Email helpers ----------
 # ---------- Email helpers ----------
 def _send_email(subject: str, text_body: str, html_body: str | None, recipients: list[str] | None):
     """Low-level sender used by async wrappers."""
@@ -89,6 +63,7 @@ def _send_email(subject: str, text_body: str, html_body: str | None, recipients:
         print("EMAIL ERROR:", repr(e))
 
 
+
 def _send_demo_email_async(subject: str, text_body: str, html_body: str | None = None):
     recipients = getattr(settings, "DEMO_RECIPIENTS", None) or getattr(settings, "CONTACT_RECIPIENTS", None)
     Thread(target=_send_email, args=(subject, text_body, html_body, recipients), daemon=True).start()
@@ -98,7 +73,6 @@ def _send_contact_email_async(subject: str, text_body: str, html_body: str | Non
     """Fire-and-forget email for Contact form."""
     recipients = getattr(settings, "CONTACT_RECIPIENTS", None)
     Thread(target=_send_email, args=(subject, text_body, html_body, recipients), daemon=True).start()
-
 def request_demo_view(request):
     if request.method != "POST":
         return redirect("/")
@@ -185,6 +159,7 @@ def request_demo_view(request):
     # normal mode
     return redirect(thanks_url)
 
+
 def home(request):
     return render(request, "index.html")
 
@@ -192,15 +167,17 @@ def home(request):
 def request_demo(request):
     return render(request, "request_demo_modal.html")
 
+
+
+
 def contact(request):     return render(request, "contact.html")
 
 def about(request):       return render(request, "about.html")
 
-
 def sitemap(request):
-    with staticfiles_storage.open('sitemap.xml') as sitemap_file:
-        return HttpResponse(sitemap_file, content_type='application/xml')
-# def contact(request):     return render(request, "neplan-contact.html")
+    with staticfiles_storage.open("sitemap.xml") as f:
+        return HttpResponse(f.read(), content_type="application/xml")
+
 def contact_section(request):
     form = ContactForm(request.POST or None)
 
@@ -255,6 +232,7 @@ def contact_section(request):
         return redirect(reverse("cmmsApp:contact_thanks"))
 
     return render(request, "contact_section.html", {"form": form, "sent": request.GET.get("sent")})
+
 
 
 # ---------- NEW: helper (not a view) ----------
@@ -339,26 +317,11 @@ def contact_block_submit(request):
     e164_phone, alpha2, country_name = normalize_phone_and_country(phone, country)
     dial_code = _dial_code_from_alpha2(alpha2)
 
-    # # --- Append to Excel ---
-    # xlsx_path = Path(getattr(settings, "CONTACT_SUBMISSIONS_XLSX",
-    #                          Path(settings.BASE_DIR) / "contact_submissions.xlsx"))
-    # # Be liberal with columns; utils will just append the row.
-    # append_submission_xlsx(
-    #     xlsx_path,
-    #     [
-    #         datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-    #         name,
-    #         email,
-    #         e164_phone or phone,
-    #         alpha2,
-    #         country_name,
-    #         dial_code,
-    #         service,
-    #         message,
-    #         request.META.get("REMOTE_ADDR", ""),
-    #         request.META.get("HTTP_REFERER", ""),
-    #     ],
-    # )
+    # --- Append to Excel ---
+    xlsx_path = Path(getattr(settings, "CONTACT_SUBMISSIONS_XLSX",
+                             Path(settings.BASE_DIR) / "contact_submissions.xlsx"))
+    # Be liberal with columns; utils will just append the row.
+   
 
     # --- Email notification ---
     subject = f"[Website] Consulting request: {name} – {service or 'General'}"
@@ -381,7 +344,6 @@ def contact_block_submit(request):
 
     messages.success(request, "Thanks! Your request was submitted successfully.")
     return redirect(reverse("cmmsApp:contact_thanks"))
-
 
 
 
