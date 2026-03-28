@@ -11,6 +11,43 @@
   --c-shadow: 0 20px 70px rgba(2, 8, 23, .24);
 }
 
+.form-captcha{
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 15px 0 20px 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.form-captcha .g-recaptcha{
+  display: inline-block;
+  background: #fff;
+  border-radius: 8px;
+  max-width: 100%;
+}
+
+.consult-send{
+  grid-column: 1 / -1;
+  justify-self: end !important;
+  align-self: start;
+  margin-left: auto;
+  min-width: 180px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #ff8a00, #d68317) !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  width: auto !important;
+}
+
+
 /* ===== WRAPPER ===== */
 
 .consult-block {
